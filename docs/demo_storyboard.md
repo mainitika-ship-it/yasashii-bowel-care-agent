@@ -2,6 +2,8 @@
 
 The event allows a maximum 5-minute video. This storyboard leaves buffer for upload / playback differences.
 
+Before recording, capture a successful three-case run with a real tool-capable model. Strands is mandatory; Bedrock is optional. Use one route for the whole recording and show its honest execution-mode banner. The implementation currently has SDK tests, not a recorded real-model run. Use [architecture.png](architecture.png) as the matching visual.
+
 ## 0:00–0:30 — Problem
 
 Visual: simple title + caregiver routine.
@@ -30,7 +32,13 @@ Run:
 python src/agent.py --event sample_data/high_confidence_event.json --dry-run
 ```
 
-Then, after AWS preflight succeeds, show the live Strands version:
+Then show the live Strands version using an installed local model after its [metadata check](local_model_guide.md):
+
+```bash
+python src/agent.py --event sample_data/high_confidence_event.json --provider ollama --model-id YOUR_INSTALLED_MODEL
+```
+
+Alternatively, after owner-approved AWS setup and preflight:
 
 ```bash
 python src/agent.py --event sample_data/high_confidence_event.json --allow-paid-model
@@ -74,8 +82,7 @@ Mention:
 
 - Python
 - Strands Agents SDK
-- Amazon Bedrock
-- Amazon Nova Lite
+- the model actually used in the recording: installed Ollama model or Amazon Bedrock / Nova Lite
 - deterministic QC policy
 - tool calling
 - local JSONL handoff data
@@ -101,6 +108,6 @@ End with three statements:
 
 ## Recording rehearsal added 2026-09-10
 
-Run `python src/demo.py --mode offline` first to rehearse the complete local loop at no cost. For final live footage, run `python src/demo.py --mode live --allow-paid-model` only after owner-approved AWS setup. Use its printed unique run directory and show `report.json` with `verified: true` and `is_live_evidence: true`. Do not label offline or scripted-model tests as a live model demonstration. Use English narration or English subtitles; no public video has been produced by this code update.
+Run `python src/demo.py --mode offline` first to rehearse the complete local loop at no cost. For final live footage, use `python src/demo.py --mode live --provider ollama --model-id YOUR_INSTALLED_MODEL`, or `python src/demo.py --mode live --allow-paid-model` after owner-approved AWS setup. Use its printed unique run directory and show `report.json` with `verified: true` and `is_live_agent_evidence: true`. The legacy `is_live_evidence` flag is Bedrock-only. Do not label offline or scripted-model tests as a real-model demonstration. Use English narration or English subtitles; no public video has been produced by this code update.
 
-The command now also prints `view_path`. Open that `report.html` for the readable three-case result and handoff count. Keep the execution-mode banner in the recording. An offline rehearsal screen must never stand in for final live Bedrock evidence. If the page says an attempt is incomplete, inspect local logs before repeating it because a write or model charge may already have occurred.
+The command also prints `view_path`. Open that `report.html` for the readable three-case result and handoff count. Keep the execution-mode banner in the recording, including the local-provider label when applicable. An offline rehearsal screen must never stand in for actual model evidence. If the page says an attempt is incomplete, inspect local logs before repeating it because a write may already have occurred; Bedrock attempts may also have incurred a charge.

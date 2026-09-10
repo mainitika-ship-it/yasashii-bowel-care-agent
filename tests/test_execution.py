@@ -89,7 +89,7 @@ def test_model_failure_after_write_is_not_verified(tmp_path, monkeypatch):
     def fail_after_write(prompt):
         run.execute("record_observation")
         raise RuntimeError("acknowledgement failed")
-    monkeypatch.setattr(agent, "build_agent", lambda *args: fail_after_write)
+    monkeypatch.setattr(agent, "build_agent", lambda *args, **kwargs: fail_after_write)
     with pytest.raises(RuntimeError):
         agent.run_live_event(run, allow_paid_model=True)
     assert run.receipt()["execution_failed"] is True

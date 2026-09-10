@@ -18,13 +18,24 @@ def render_report(report: dict) -> str:
         and all(c.get("bedrock_called") is True and c.get("verified") is True
                 for c in report.get("cases", []))
     )
+    local_live = (
+        complete and report.get("mode") == "live" and report.get("model_provider") == "ollama"
+        and report.get("is_live_agent_evidence") is True
+        and len(report.get("cases", [])) == 3
+        and all(c.get("model_called") is True and c.get("bedrock_called") is False
+                and c.get("verified") is True for c in report.get("cases", []))
+    )
     if live:
         banner = "Live Bedrock run / AWSにつないだ実行"
+    elif local_live:
+        banner = "Live local model via Strands / ローカルAIで実行 — No Bedrock calls"
     elif report.get("mode") == "offline":
         banner = "OFFLINE rehearsal / 無料の模擬実行 — Not live Bedrock evidence"
+    elif report.get("model_provider") == "ollama":
+        banner = "INCOMPLETE local model attempt / ローカルAI実行は未完了"
     else:
         banner = "INCOMPLETE live attempt / AWS実行は未完了 — Costs may have occurred"
-    complete = complete and (report.get("mode") == "offline" or live)
+    complete = complete and (report.get("mode") == "offline" or live or local_live)
     outcome = "Demo checks passed / デモ確認成功" if complete else "Incomplete / 実行未完了"
     labels = {
         "PASS": ("Recorded / 観察を記録", "Only this observation enters the handoff. / この観察だけを申し送りに数えます。"),

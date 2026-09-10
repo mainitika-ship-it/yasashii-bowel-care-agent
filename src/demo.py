@@ -27,12 +27,17 @@ def run_demo(
     mode: str = "offline", sample_dir: str | Path = PROJECT_ROOT / "sample_data",
     runtime_dir: str | Path = "runtime/demo", confidence_threshold: float = 0.80,
     model_id: str | None = None, region_name: str | None = None,
-    *, allow_paid_model: bool = False,
+    *, allow_paid_model: bool = False, provider: str = "bedrock",
 ) -> dict:
     if mode not in {"offline", "live"}:
         raise ValueError("execution mode must be offline or live")
-    if mode == "live" and not allow_paid_model:
+    if provider not in {"bedrock", "ollama"}:
+        raise ValueError("provider must be bedrock or ollama")
+    if mode == "live" and provider == "bedrock" and not allow_paid_model:
         raise ValueError("live demo requires explicit permission for Bedrock costs")
+    if mode == "live" and provider == "ollama":
+        from local_model import validate_model_id
+        validate_model_id(model_id)
     settings = resolve_bedrock_settings(model_id, region_name)
     # Validate ALL cases before the first cloud request or filesystem write.
     cases = []
@@ -51,11 +56,12 @@ def run_demo(
     run_dir = Path(runtime_dir) / run_id
     run_dir.mkdir(parents=True, exist_ok=False)
     report = {
-        "schema_version": 1, "run_id": run_id, "created_at": now.isoformat(),
+        "schema_version": 2, "run_id": run_id, "created_at": now.isoformat(),
         "mode": mode, "synthetic_data_only": True,
-        "is_live_evidence": False, "verified": False,
+        "is_live_evidence": False, "is_live_agent_evidence": False, "verified": False,
+        "model_provider": provider if mode == "live" else None,
         "model_id": settings.model_id if mode == "live" else None,
-        "region": settings.region_name if mode == "live" else None,
+        "region": settings.region_name if mode == "live" and provider == "bedrock" else None,
         "source_sha256": {
             p.name: hashlib.sha256(p.read_bytes()).hexdigest()
             for p in sorted((PROJECT_ROOT / "src").glob("*.py"))
@@ -72,8 +78,9 @@ def run_demo(
             case = {
                 "sample": filename, "sample_sha256": sample_hash,
                 # On a failed live attempt the outcome/cost is unknown, not zero.
-                "bedrock_called": None if mode == "live" else False,
-                "bedrock_attempted": mode == "live",
+                "bedrock_called": None if mode == "live" and provider == "bedrock" else False,
+                "bedrock_attempted": mode == "live" and provider == "bedrock",
+                "model_called": None if mode == "live" else False,
             }
             report["cases"].append(case)
             try:
@@ -83,7 +90,8 @@ def run_demo(
                 else:
                     from agent import run_live_event
                     case.update(run_live_event(
-                        run, settings.model_id, settings.region_name, allow_paid_model=True,
+                        run, settings.model_id, settings.region_name,
+                        allow_paid_model=allow_paid_model, provider=provider,
                     ))
             finally:
                 case.update(run.receipt())
@@ -99,8 +107,12 @@ def run_demo(
             and report["handoff"]["observation_count"] == 1
         )
         report["is_live_evidence"] = (
-            mode == "live" and report["verified"]
+            mode == "live" and provider == "bedrock" and report["verified"]
             and all(case["bedrock_called"] for case in report["cases"])
+        )
+        report["is_live_agent_evidence"] = (
+            mode == "live" and report["verified"]
+            and all(case["model_called"] is True for case in report["cases"])
         )
     except Exception as exc:
         # Do not leak credential details, account IDs, prompts, or SDK responses.
@@ -122,6 +134,7 @@ def main() -> None:
     parser.add_argument("--confidence-threshold", type=float, default=0.80)
     parser.add_argument("--model-id", default=None)
     parser.add_argument("--region", default=None)
+    parser.add_argument("--provider", choices=("bedrock", "ollama"), default="bedrock")
     parser.add_argument("--allow-paid-model", action="store_true")
     args = parser.parse_args()
     if args.mode == "qc":
@@ -131,11 +144,12 @@ def main() -> None:
             print(f"{filename} -> {decision.control_status}")
             print(json.dumps(decision.to_dict(), ensure_ascii=False))
         return
-    if args.mode == "live" and not args.allow_paid_model:
+    if args.mode == "live" and args.provider == "bedrock" and not args.allow_paid_model:
         parser.error("live mode incurs Bedrock costs; explicitly add --allow-paid-model")
     report = run_demo(
         args.mode, args.sample_dir, args.runtime_dir, args.confidence_threshold,
         args.model_id, args.region, allow_paid_model=args.allow_paid_model,
+        provider=args.provider,
     )
     print(json.dumps(report, ensure_ascii=False, indent=2))
     raise SystemExit(0 if report["verified"] else 1)

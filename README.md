@@ -2,6 +2,8 @@
 
 [日本語の実行ガイド](README_JA.md) · [Automated checks](https://github.com/mainitika-ship-it/yasashii-bowel-care-agent/actions)
 
+[Official requirement recheck](docs/hackathon_recheck.md) · [Local model route](docs/local_model_guide.md) · [Architecture PNG](docs/architecture.png)
+
 A privacy-first AI agent for family caregivers, prepared for the **Agents for Humans Hackathon**.
 
 The project turns a minimal, non-identifying observation from a local vision layer into one of three safe actions:
@@ -29,7 +31,7 @@ A basic local bowel-monitoring prototype existed before the submission period. I
 The hackathon work adds:
 
 - a **Strands Agents SDK** orchestration layer;
-- an explicit Amazon Bedrock model configuration;
+- explicit model configuration for Amazon Bedrock or an installed local Ollama model;
 - an explainable confidence and quality-control policy;
 - human confirmation for uncertain observations;
 - safe stop behavior when privacy or signal checks fail;
@@ -52,20 +54,23 @@ See [`docs/qc_method.md`](docs/qc_method.md).
 ## Architecture
 
 ```mermaid
-flowchart LR
-    B[Pre-existing local vision<br/>Integration not yet verified] -.-> C[Validated structured event]
-    A[Synthetic JSON samples] --> C
-    C --> D[Explainable QC control plan<br/>PASS / HOLD / STOP]
-    D -->|Privacy flag| H[Local safety alert<br/>No cloud call]
-    D -->|Non-identifying event| E[Strands Agents SDK<br/>Amazon Bedrock / Nova Lite]
-    E --> K[Local action guard<br/>QC match and one write per run]
-    K -->|PASS| F[Quiet observation record]
-    K -->|HOLD| G[Pending caregiver review queue]
-    K -->|STOP| H
-    F --> I[Daily handoff summary]
+flowchart TD
+    A[Synthetic JSON samples] --> C[Schema and QC]
+    B[Pre-existing vision: integration unverified] -.-> C
+    C -->|Live and privacy check passed| E[Strands: Bedrock or local Ollama]
+    C -->|Offline or privacy stop| K[Local action guard]
+    E --> K
+    K -->|PASS| F[Observation record]
+    K -->|HOLD| G[Pending caregiver queue]
+    K -->|STOP| H[Safety alert]
+    F --> I[Daily handoff]
 ```
 
-More detail: [`docs/architecture.md`](docs/architecture.md).
+More detail: [`docs/architecture.md`](docs/architecture.md). The [PNG diagram](docs/architecture.png) is ready for the required Devpost file attachment; uploading it remains an owner action.
+
+## Choose a model route
+
+**Strands Agents SDK is required; a specific model or Bedrock is not.** See the [official requirement recheck](docs/hackathon_recheck.md), including the host's September 9 clarification. The local route connects to an already installed, tool-capable Ollama model. The Bedrock route requires explicit permission for paid calls. Neither route has a verified real-model three-case run from this build environment yet.
 
 ## Default Bedrock model
 
@@ -94,6 +99,7 @@ yasashii-bowel-care-agent/
 │   ├── demo.py               # PASS / HOLD / STOP demo runner
 │   ├── execution.py          # model-independent write guard
 │   ├── handoff.py            # privacy-minimized daily summary
+│   ├── local_model.py        # local Ollama metadata check and provider
 │   ├── model_config.py       # explicit Bedrock model / region settings
 │   └── qc_policy.py          # deterministic, explainable QC control plan
 ├── sample_data/              # synthetic JSON events only
@@ -151,7 +157,19 @@ Success means `verified: true`, `is_live_evidence: false`, and exactly one line 
 
 The accompanying `report.html` is a local, read-only result screen with no scripts or external resources. It explains PASS (recorded), HOLD (human review pending), and STOP (safety stop), shows the handoff count, and distinguishes offline, completed live, and incomplete live runs. It provides no caregiver approval controls and never displays raw SDK errors. Results are local reports, not signed attestations; review them with the underlying logs before sharing.
 
-### 2. Prepare AWS safely
+### 2. Run with an installed local model
+
+Read the [local model guide](docs/local_model_guide.md) first. Replace `YOUR_INSTALLED_MODEL` with an exact model name from your own `ollama list`; tool support is required. The check does not generate tokens or download a model.
+
+```bash
+python src/local_model.py --model-id YOUR_INSTALLED_MODEL
+pip install -r requirements-local.txt
+python src/demo.py --mode live --provider ollama --model-id YOUR_INSTALLED_MODEL
+```
+
+A successful three-case run has `verified: true`, `is_live_agent_evidence: true`, `model_provider: "ollama"`, and `bedrock_called: false` for all cases. The legacy `is_live_evidence` flag remains Bedrock-only and is false for a local run. Local metadata alone is not inference evidence. The route uses numeric loopback, rejects cloud-model metadata and redirects, and has no paid fallback. It relies on the local Ollama server reporting truthful metadata; see the guide for local-only server settings.
+
+### 3. Alternative: prepare AWS safely
 
 Before a live model call:
 
@@ -177,7 +195,7 @@ A successful result has:
 }
 ```
 
-### 3. Run the live Strands + Bedrock demo
+### 4. Run the live Strands + Bedrock demo
 
 After the preflight succeeds:
 
@@ -193,11 +211,11 @@ The Strands agent receives both the validated structured event and QC decision, 
 
 Runtime JSONL files are local and excluded from Git.
 
-`--allow-paid-model` is mandatory for live mode, single-event model runs, and the AWS preflight. Each event has a fresh agent, at most two model cycles (tool selection and acknowledgement), 512 output tokens per cycle, and SDK/model-client retries disabled. These are request limits, **not a dollar-cost guarantee**; retain AWS Budget alerts. An event flagged as containing personal data stops locally before model/credential access, regardless of opt-in.
+`--allow-paid-model` is mandatory for Bedrock live mode, Bedrock single-event runs, and the AWS preflight. The Ollama route does not use that flag. Each event has a fresh agent, at most two model cycles (tool selection and acknowledgement), and 512 output tokens per cycle. SDK retries are disabled; the Bedrock client also disables retries. These are request limits, **not a dollar-cost guarantee**; retain AWS Budget alerts when using Bedrock. An event flagged as containing personal data stops locally before either model route or credential access.
 
-The saved `report.json` includes input/source hashes, tool receipts, log counts, handoff, and mode. Only a successfully completed three-case live run can set `is_live_evidence: true`. A failed live attempt can still incur costs; it leaves an incomplete report, not a false success. Do not publish raw SDK errors or runtime files without a privacy review.
+The saved `report.json` includes input/source hashes, tool receipts, log counts, handoff, mode, and provider. Only a successfully completed three-case live run can set `is_live_agent_evidence: true`; the legacy `is_live_evidence` flag requires Bedrock as well. A failed Bedrock attempt can still incur costs; failed attempts leave an incomplete report. Do not publish raw SDK errors or runtime files without a privacy review.
 
-### 4. Create a daily handoff summary
+### 5. Create a daily handoff summary
 
 ```bash
 python src/handoff.py --runtime-dir runtime/demo/<run-id> --date 2026-08-18
@@ -221,7 +239,7 @@ The public test set covers:
 - real Strands event-loop execution with a scripted local model (no Bedrock calls);
 - fresh-run evidence and safe standalone export boundaries.
 
-Automated tests prohibit socket connections. The scripted model tests verify SDK wiring, **not** Bedrock access, model behavior, physical sensing, or clinical accuracy.
+Automated tests prohibit socket connections. The scripted model tests verify SDK wiring for both provider routes, **not** Bedrock access, actual Ollama inference, model behavior, physical sensing, or clinical accuracy.
 
 ## Privacy and safety
 
@@ -250,11 +268,13 @@ Current status is tracked in [`docs/submission_readiness.md`](docs/submission_re
 
 Still required before final submission:
 
-- successfully run and capture the **live Strands + Bedrock** three-case demo;
-- connect the local vision event output to the agent end to end;
+- successfully run and capture the **live Strands + tool-capable model** three-case demo (local Ollama or Bedrock);
 - record a public demo video of at most 5 minutes;
-- verify this dedicated public repository's license presentation and copy its URL into the final Devpost entry;
-- complete the Devpost final submission fields.
+- copy this dedicated repository URL into Devpost; the existing project still points to the old repository folder;
+- upload the matching architecture diagram and recheck all required fields, including AWS Builder ID;
+- complete owner verification and final Submit by **September 15, 2026, 09:00 JST**.
+
+The physical camera connection is a separate integration goal. This submission demonstrates synthetic event input; do not claim verified camera integration or continuous monitoring.
 
 Optional score boosters after the core flow works:
 
@@ -268,6 +288,7 @@ Optional score boosters after the core flow works:
 - Strands Agents SDK
 - Amazon Bedrock
 - Amazon Nova Lite
+- Ollama (optional local provider; real inference remains to be verified)
 - structured computer-vision event inputs
 - JSONL / local event logging
 - Pytest

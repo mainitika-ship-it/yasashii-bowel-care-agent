@@ -60,23 +60,29 @@ def build_tools(run: EventRun) -> list:
     return [record_observation, request_caregiver_confirmation, stop_and_check_signal]
 
 
-def build_agent(run: EventRun, model_id: str | None = None, region_name: str | None = None):
+def build_agent(run: EventRun, model_id: str | None = None, region_name: str | None = None,
+                *, provider: str = "bedrock"):
     """Construct a fresh Strands agent for one event, never a shared care conversation."""
     if run.event.contains_personal_data:
         raise ValueError("privacy-flagged events must stop locally, not construct a model")
     from strands import Agent
-    from strands.models import BedrockModel
-    from botocore.config import Config
-
-    settings = resolve_bedrock_settings(model_id, region_name)
-    model = BedrockModel(
-        model_id=settings.model_id, region_name=settings.region_name,
-        temperature=0.0, max_tokens=512,
-        boto_client_config=Config(
-            connect_timeout=10, read_timeout=60,
-            retries={"total_max_attempts": 1, "mode": "standard"},
-        ),
-    )
+    if provider == "ollama":
+        from local_model import build_local_model, validate_model_id
+        model = build_local_model(validate_model_id(model_id))
+    elif provider == "bedrock":
+        from strands.models import BedrockModel
+        from botocore.config import Config
+        settings = resolve_bedrock_settings(model_id, region_name)
+        model = BedrockModel(
+            model_id=settings.model_id, region_name=settings.region_name,
+            temperature=0.0, max_tokens=512,
+            boto_client_config=Config(
+                connect_timeout=10, read_timeout=60,
+                retries={"total_max_attempts": 1, "mode": "standard"},
+            ),
+        )
+    else:
+        raise ValueError("provider must be bedrock or ollama")
     return Agent(
         model=model,
         callback_handler=None,
@@ -104,21 +110,24 @@ def _build_prompt(event: ObservationEvent, decision: QCDecision) -> str:
 
 def run_live_event(
     run: EventRun, model_id: str | None = None, region_name: str | None = None,
-    *, allow_paid_model: bool = False,
+    *, allow_paid_model: bool = False, provider: str = "bedrock",
 ) -> dict[str, Any]:
     # A privacy STOP must happen before model construction or credential access.
     if run.event.contains_personal_data:
         run.execute("stop_and_check_signal")
-        return {**run.verify(), "bedrock_called": False, "execution": "local_privacy_stop"}
-    if not allow_paid_model:
+        return {**run.verify(), "bedrock_called": False, "model_called": False, "execution": "local_privacy_stop"}
+    if provider not in {"bedrock", "ollama"}:
+        raise ValueError("provider must be bedrock or ollama")
+    if provider == "bedrock" and not allow_paid_model:
         raise ValueError("live Bedrock calls require explicit allow_paid_model=True")
     try:
-        agent = build_agent(run, model_id, region_name)
+        agent = build_agent(run, model_id, region_name, provider=provider)
         agent(_build_prompt(run.event, run.decision))
     except Exception:
         run.invalidate()
         raise
-    return {**run.verify(), "bedrock_called": True, "execution": "strands_bedrock"}
+    return {**run.verify(), "bedrock_called": provider == "bedrock",
+            "model_called": True, "execution": "strands_" + provider}
 
 
 def main() -> None:
@@ -128,6 +137,7 @@ def main() -> None:
     parser.add_argument("--runtime-dir", default="runtime")
     parser.add_argument("--model-id", default=None)
     parser.add_argument("--region", default=None)
+    parser.add_argument("--provider", choices=("bedrock", "ollama"), default="bedrock")
     parser.add_argument("--dry-run", action="store_true", help="No model or care-log writes")
     parser.add_argument("--allow-paid-model", action="store_true", help="Explicitly permit Bedrock costs")
     args = parser.parse_args()
@@ -137,14 +147,18 @@ def main() -> None:
         settings = resolve_bedrock_settings(args.model_id, args.region)
         print(json.dumps({
             "event": event.to_dict(), "qc_decision": decision.to_dict(),
-            "bedrock": {"model_id": settings.model_id, "region": settings.region_name, "called": False},
+            "model": {"provider": args.provider,
+                      "model_id": args.model_id if args.provider == "ollama" else settings.model_id,
+                      "region": settings.region_name if args.provider == "bedrock" else None,
+                      "called": False},
         }, ensure_ascii=False, indent=2))
         return
-    if not args.allow_paid_model and not event.contains_personal_data:
+    if args.provider == "bedrock" and not args.allow_paid_model and not event.contains_personal_data:
         parser.error("use --dry-run, or explicitly authorize costs with --allow-paid-model")
     run = EventRun(event, args.runtime_dir, args.confidence_threshold)
     print(json.dumps(run_live_event(
         run, args.model_id, args.region, allow_paid_model=args.allow_paid_model,
+        provider=args.provider,
     ), ensure_ascii=False, indent=2))
 
 

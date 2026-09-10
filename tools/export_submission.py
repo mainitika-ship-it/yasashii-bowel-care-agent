@@ -19,17 +19,22 @@ from qc_policy import ObservationEvent
 # Explicit names, not directory globs: newly added local files never publish silently.
 PUBLIC_FILES = (
     ".gitignore", "LICENSE", "README.md", "README_JA.md", "requirements.txt", "requirements-dev.txt",
+    "requirements-local.txt", "requirements-assets.txt",
     "docs/architecture.md", "docs/demo_storyboard.md", "docs/publication_safety.md",
     "docs/qc_method.md", "docs/submission_readiness.md", "docs/repository_transfer.md",
     "docs/verification_2026-09-10.md",
+    "docs/architecture.png", "docs/hackathon_recheck.md", "docs/local_model_guide.md",
     "sample_data/bad_signal_event.json", "sample_data/high_confidence_event.json",
     "sample_data/sample_event.json", "sample_data/uncertain_event.json",
     "src/agent.py", "src/bedrock_preflight.py", "src/demo.py", "src/execution.py",
     "src/handoff.py", "src/model_config.py", "src/qc_policy.py", "src/report_view.py",
+    "src/local_model.py",
     "tests/conftest.py", "tests/test_demo.py", "tests/test_execution.py",
     "tests/test_export_submission.py", "tests/test_handoff.py", "tests/test_model_config.py",
     "tests/test_preflight.py", "tests/test_qc_policy.py", "tests/test_strands_integration.py", "tests/test_report_view.py",
+    "tests/test_local_model.py",
     "tools/export_submission.py", "tools/standalone-ci.yml",
+    "tools/render_architecture.py",
 )
 SECRET_PATTERN = re.compile(
     rb"(?:AKIA|ASIA)[A-Z0-9]{16}|gh[pousr]_[A-Za-z0-9]{20,}|"

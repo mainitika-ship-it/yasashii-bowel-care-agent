@@ -15,3 +15,7 @@ def no_network(monkeypatch):
     monkeypatch.setattr(socket.socket, "connect", blocked)
     monkeypatch.setattr(socket.socket, "connect_ex", blocked)
     monkeypatch.setenv("AWS_EC2_METADATA_DISABLED", "true")
+    # Ollama's import creates a default HTTPX client. Tests use scripted models
+    # and deny sockets; proxy configuration must not require extra proxy drivers.
+    monkeypatch.setenv("NO_PROXY", "*")
+    monkeypatch.setenv("no_proxy", "*")

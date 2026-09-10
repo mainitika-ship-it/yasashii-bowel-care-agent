@@ -4,29 +4,32 @@ Updated: 2026-09-10
 
 This file is the project-side checklist for the final Devpost submission. It is intentionally conservative: an item is marked complete only when it has been verified, not merely planned.
 
+Official requirements and the current Devpost entry were freshly checked on September 10; see [the recheck record](hackathon_recheck.md). **Strands is required, but Bedrock or a specific model is not.** Deadline: **2026-09-15 09:00 JST**. The current Devpost entry has an empty video URL and no hackathon `submitted_at` value; a published project page is not a final hackathon submission.
+
 ## Required by the event
 
 | Requirement | Status | Evidence / next action |
 |---|---|---|
-| Working agent built with Strands Agents SDK | IN PROGRESS | Agent and tools exist; live Bedrock three-case run still needs to be captured. |
+| Working agent built with Strands Agents SDK | IN PROGRESS | Both Bedrock and local Ollama routes exist; capture a real-model three-case run on either route. Scripted SDK tests do not establish actual model behavior. |
 | Public code repository | DONE | https://github.com/mainitika-ship-it/yasashii-bowel-care-agent is public. Root source and READMEs verified at commit `02191d53a787a050b955a6fa8260a10777298a6c`; [CI passed](https://github.com/mainitika-ship-it/yasashii-bowel-care-agent/actions/runs/34472636948). Devpost's repository field still needs owner-reviewed updating. |
 | README | DONE | Setup, architecture, safety, pre-existing disclosure, and demo commands are documented. |
 | MIT or Apache license | DONE | Root `LICENSE` is published. GitHub repository metadata identifies its license as MIT (`spdx_id: MIT`), verified 2026-09-10. |
-| Architecture diagram | RECHECK | Prior record says an image is on Devpost. Updated guard/privacy-bypass Mermaid source is in `docs/architecture.md`; ensure the final uploaded diagram matches. |
+| Architecture diagram | FILE READY / UPLOAD UNVERIFIED | [architecture.png](architecture.png) matches the current implementation and is in an accepted attachment format. Upload/recheck the final file on Devpost. |
 | Demo video, max 5 minutes | NOT STARTED | Record only after the live end-to-end flow is stable. See `docs/demo_storyboard.md`. |
 | AWS Builder ID | PREVIOUSLY DONE | Prior record says it was entered; recheck the final required field before Submit. |
 | Problem / audience / why it matters | DONE | Present in Devpost story and README. |
+| English or English translation | TEXT READY / VIDEO PENDING | README and PNG are in English; the public video must also use English narration or translation. |
+| Required fields and final Submit | NOT COMPLETE | Current Devpost repository URL still points to the old parent folder. Submitter type, country, track, source URL, architecture upload, and AWS Builder ID must be checked by the owner. |
 
 ## Core implementation gate
 
-Do not record the final video until all four checks below pass:
+For the working-agent portion of the video, complete these three checks:
 
-1. With owner permission for costs, `python src/bedrock_preflight.py --allow-paid-model` returns `credentials_ok=true` and `bedrock_ok=true`.
+1. Choose one real model route. For local Ollama, follow the [metadata check and setup](local_model_guide.md); for Bedrock, obtain owner permission for costs and run the paid preflight.
 2. `python src/demo.py --mode qc` shows PASS, HOLD, STOP in that order.
-3. `python src/demo.py --mode live --allow-paid-model` creates a fresh report with `verified=true` and `is_live_evidence=true`, and one matching tool for each case.
-4. A real local-vision structured event can be handed to the same agent interface without patient-identifying data.
+3. Run `python src/demo.py --mode live --provider ollama --model-id YOUR_INSTALLED_MODEL` or the Bedrock command `python src/demo.py --mode live --allow-paid-model`. A fresh report must have `verified=true`, `is_live_agent_evidence=true`, and one matching tool for each case. The older `is_live_evidence` field is Bedrock-only and is false for local Ollama.
 
-The local-vision connection is a project integration goal, not evidence already achieved or a reason to publish real care data. Safe synthetic data must be used in the public demo. The offline demo, guarded writes, SDK scripted-model tests, and standalone packaging are now implemented; see [`verification_2026-09-10.md`](verification_2026-09-10.md). No live AWS request or final Devpost Submit was performed in this update.
+The local-vision connection is a separate project integration goal, not an additional official requirement or evidence already achieved. Show and label synthetic input in the public demo; do not claim camera integration. The offline demo, guarded writes, SDK scripted-model tests, and standalone packaging are implemented; see [`verification_2026-09-10.md`](verification_2026-09-10.md). No real-model inference or final Devpost Submit was performed in this update.
 
 The current build also generates a bilingual, read-only `report.html` for each offline or live demo attempt. It makes pending review and safety stops visible without pretending to implement caregiver approval. See [Japanese execution guide](../README_JA.md). The report screen is preparation for recording; no public demo video has yet been produced.
 
@@ -37,7 +40,7 @@ The current build also generates a bilingual, read-only `report.html` for each o
 Priority evidence:
 
 - explicit Strands Agents SDK use;
-- Amazon Bedrock / Nova Lite model configuration;
+- explicit provider and model configuration, with local Ollama or Bedrock;
 - three real tool calls rather than a chat-only mockup;
 - deterministic QC gate before model orchestration;
 - live demonstration if possible.
