@@ -6,6 +6,20 @@ The organizer permits any model with Strands. This optional route uses an alread
 
 ## 1. Check an existing model without generation / 既存モデルの確認
 
+The simplest check discovers installed models automatically:
+
+```bash
+python3 src/check_local_setup.py
+```
+
+Run from the downloaded repository root on your Mac. This standard-library-only helper reads the [Ollama model list](https://docs.ollama.com/api/tags) and checks at most eight valid local model names using the same metadata checks as the live route. It checks the pinned Python package versions without importing or invoking a model. Once the packages and at least one candidate are verified, it prints safely quoted commands containing the actual model name and project path; choose one. A zero exit code means metadata/packages checked, not successful inference. Unreachable services, malformed responses, absent tools support, or missing packages remain incomplete. The helper never runs a command, installs packages, downloads a model, writes a report, changes settings, or falls back to AWS.
+
+Macで上の1行を実行すると、モデル名を自分で調べずに準備確認できます。確認済みの候補があれば、実行コマンドを表示します。「確認必要」は実行条件がまだそろっていない意味です。Ollamaに接続できない場合は、MacでOllamaを開き、同じ確認を再実行します。ライブラリが不足する場合は下の手順2を済ませ、仮想環境のPythonで再確認します。まだモデルを追加購入する必要はありません。
+
+If more than eight models are present, excess names are reported as unchecked; check a known model directly with the command below. Model-list and per-model requests each time out after ten seconds. The helper prints progress between checks. It cannot reach the owner's Mac from a separate Codex workspace; it must run on the computer hosting Ollama.
+
+### Direct check of one named model
+
 From the project root on the computer where Ollama is already running:
 
 ```bash

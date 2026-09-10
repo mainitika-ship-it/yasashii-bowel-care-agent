@@ -159,6 +159,8 @@ The accompanying `report.html` is a local, read-only result screen with no scrip
 
 ### 2. Run with an installed local model
 
+For automatic model discovery and a ready-to-copy next command on your Mac, run `python3 src/check_local_setup.py`. This reads metadata and installed package versions only; it does not generate tokens or install anything. A successful setup check is not a successful live agent run.
+
 Read the [local model guide](docs/local_model_guide.md) first. Replace `YOUR_INSTALLED_MODEL` with an exact model name from your own `ollama list`; tool support is required. The check does not generate tokens or download a model.
 
 ```bash

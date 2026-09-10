@@ -28,11 +28,11 @@ PUBLIC_FILES = (
     "sample_data/sample_event.json", "sample_data/uncertain_event.json",
     "src/agent.py", "src/bedrock_preflight.py", "src/demo.py", "src/execution.py",
     "src/handoff.py", "src/model_config.py", "src/qc_policy.py", "src/report_view.py",
-    "src/local_model.py",
+    "src/local_model.py", "src/check_local_setup.py",
     "tests/conftest.py", "tests/test_demo.py", "tests/test_execution.py",
     "tests/test_export_submission.py", "tests/test_handoff.py", "tests/test_model_config.py",
     "tests/test_preflight.py", "tests/test_qc_policy.py", "tests/test_strands_integration.py", "tests/test_report_view.py",
-    "tests/test_local_model.py",
+    "tests/test_local_model.py", "tests/test_check_local_setup.py",
     "tools/export_submission.py", "tools/standalone-ci.yml",
     "tools/render_architecture.py",
 )

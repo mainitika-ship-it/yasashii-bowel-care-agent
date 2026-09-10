@@ -39,4 +39,4 @@ The official evaluation covers technical implementation, design, potential impac
 
 ## Next smallest useful action
 
-On the owner's model-hosting computer, check the metadata of the already installed model using `src/local_model.py` as described in [local model guide](local_model_guide.md). This sends no observation or inference prompt and downloads nothing. A model used for vision is not assumed to support tools. After a successful check, run the synthetic live demo, inspect its result, and record the actual successful workflow.
+On the owner's model-hosting computer, run `python3 src/check_local_setup.py` from this repository root, as described in [local model guide](local_model_guide.md). It discovers existing local models and prints a next command after checking metadata and Python packages. This sends no observation or inference prompt and downloads nothing. A model used for vision is not assumed to support tools. After a successful check, run one suggested synthetic live demo command, inspect its result, and record the actual successful workflow.
