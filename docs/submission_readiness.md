@@ -9,9 +9,9 @@ This file is the project-side checklist for the final Devpost submission. It is 
 | Requirement | Status | Evidence / next action |
 |---|---|---|
 | Working agent built with Strands Agents SDK | IN PROGRESS | Agent and tools exist; live Bedrock three-case run still needs to be captured. |
-| Public code repository | VERIFY DEPLOYED CONTENT | Owner created the public dedicated repository: https://github.com/mainitika-ship-it/yasashii-bowel-care-agent . Root source, README, license and CI are being placed there in this update; verify the published commit and CI. |
+| Public code repository | DONE | https://github.com/mainitika-ship-it/yasashii-bowel-care-agent is public. Root source and READMEs verified at commit `02191d53a787a050b955a6fa8260a10777298a6c`; [CI passed](https://github.com/mainitika-ship-it/yasashii-bowel-care-agent/actions/runs/34472636948). Devpost's repository field still needs owner-reviewed updating. |
 | README | DONE | Setup, architecture, safety, pre-existing disclosure, and demo commands are documented. |
-| MIT or Apache license | VERIFY DISPLAY | MIT `LICENSE` is at the dedicated repository root. Confirm GitHub identifies it as MIT after publication. |
+| MIT or Apache license | DONE | Root `LICENSE` is published. GitHub repository metadata identifies its license as MIT (`spdx_id: MIT`), verified 2026-09-10. |
 | Architecture diagram | RECHECK | Prior record says an image is on Devpost. Updated guard/privacy-bypass Mermaid source is in `docs/architecture.md`; ensure the final uploaded diagram matches. |
 | Demo video, max 5 minutes | NOT STARTED | Record only after the live end-to-end flow is stable. See `docs/demo_storyboard.md`. |
 | AWS Builder ID | PREVIOUSLY DONE | Prior record says it was entered; recheck the final required field before Submit. |
