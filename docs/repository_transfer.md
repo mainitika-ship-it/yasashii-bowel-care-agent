@@ -18,4 +18,4 @@ If source files change, regenerate the archive and its manifest. The manifest de
 
 ## Remaining submission work
 
-Verify the public repository's license display and CI, then use this repository URL in Devpost after owner review. The Devpost entry is not edited by repository setup. Live Bedrock evidence, a public video under five minutes, required fields, and owner-confirmed final Submit remain separate tasks.
+Verify the public repository's license display and CI, then use this repository URL in Devpost after owner review. The Devpost entry is not edited by repository setup. Review real-model evidence from either the local Ollama or Bedrock route, then complete a public video under five minutes, required fields, and owner-confirmed final Submit. See [the current evidence status](submission_readiness.md); the September 11 Mac-local success report still needs its original files and exact source reconciled with the public repository.
