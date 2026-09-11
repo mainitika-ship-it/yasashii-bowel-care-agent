@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Yasashii Bowel Care Agent — Demo report</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f6f4;color:#172c24;font:16px/1.6 system-ui,sans-serif}
+main{max-width:1120px;margin:auto;padding:28px 20px 48px}h1{font-size:clamp(24px,4vw,38px);line-height:1.2}
+h2{font-size:19px}.banner{padding:14px 18px;background:#172c24;color:#fff;border-radius:10px;font-weight:700}
+.subtitle,dt{color:#465950}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin:24px 0}
+.card,.summary{background:white;padding:22px;border:1px solid #d2ded7;border-radius:14px}
+.card{border-top:6px solid #64746a}.pass{border-top-color:#247247}.hold{border-top-color:#b77500}.stop{border-top-color:#b13a39}
+.tag{font-weight:800;letter-spacing:.06em}dt{font-size:13px;margin-top:14px}dd{margin:2px 0;overflow-wrap:anywhere}
+.count{font-size:36px;font-weight:800}footer{margin-top:24px;font-size:14px}a{color:#185c43}code{overflow-wrap:anywhere}
+</style></head><body><main>
+<p class="banner">Live local model via Strands / ローカルAIで実行 — No Bedrock calls</p>
+<h1>Yasashii Bowel Care Agent</h1>
+<p class="subtitle">Synthetic demonstration / 安全な模擬データによるデモ</p>
+<p><strong>Demo checks passed / デモ確認成功</strong></p>
+<div class="grid"><article class="card pass"><span class="tag">PASS</span><h2>Recorded / 観察を記録</h2><p>Only this observation enters the handoff. / この観察だけを申し送りに数えます。</p><dl><dt>Sample / 模擬入力</dt><dd>high_confidence_event.json</dd><dt>Completed action / 完了した処理</dt><dd>record_observation</dd><dt>Tool attempts / 処理の試行数</dt><dd>1</dd><dt>Case check / 確認結果</dt><dd>Passed / 成功</dd></dl></article><article class="card hold"><span class="tag">HOLD</span><h2>Human review pending / 人の確認待ち</h2><p>An uncertain event is queued, not recorded as fact. / 不確かなため記録を確定しません。</p><dl><dt>Sample / 模擬入力</dt><dd>uncertain_event.json</dd><dt>Completed action / 完了した処理</dt><dd>request_caregiver_confirmation</dd><dt>Tool attempts / 処理の試行数</dt><dd>1</dd><dt>Case check / 確認結果</dt><dd>Passed / 成功</dd></dl></article><article class="card stop"><span class="tag">STOP</span><h2>Safety stop / 安全のため停止</h2><p>No care observation is recorded. / 介護の観察記録には加えません。</p><dl><dt>Sample / 模擬入力</dt><dd>bad_signal_event.json</dd><dt>Completed action / 完了した処理</dt><dd>stop_and_check_signal</dd><dt>Tool attempts / 処理の試行数</dt><dd>1</dd><dt>Case check / 確認結果</dt><dd>Passed / 成功</dd></dl></article></div>
+<section class="summary"><h2>Daily handoff / 申し送り</h2>
+<span class="count">1</span> recorded observation(s) / 記録済みの観察件数
+<p>Sample date / 模擬データの日付: 2026-08-18</p>
+<p>Pending review and safety stops are excluded. / 確認待ち・安全停止は件数に含みません。</p></section>
+<footer>
+<p>This supports observation; it is not a medical diagnosis. Missing observations do not prove no bowel movement occurred.<br>
+観察の補助であり、診断ではありません。記録がないことは、排便がなかった証明にはなりません。</p>
+<p>This page is read-only. Caregiver approval controls are not implemented.<br>この画面は結果の閲覧専用です。介護者の承認操作はまだ実装していません。</p>
+<p>Run / 実行: <code>20260911T051811Z-50c8566cb79e</code><br>Generated / 作成: 2026-09-11T05:18:11.450393+00:00</p>
+<a href="report.json">Machine-readable report / 詳細データ</a>
+</footer></main></body></html>

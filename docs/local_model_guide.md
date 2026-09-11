@@ -1,8 +1,8 @@
 # Local Strands demo / ローカルAIでのデモ
 
-The organizer permits any model with Strands. This optional route uses an already installed Ollama model on the same computer. It adds no AWS calls and never falls back to Bedrock. It still uses the real Strands SDK and guarded action tools. Actual Ollama inference has **not** been verified on the owner's Mac by this update.
+The organizer permits any model with Strands. This optional route uses an already installed Ollama model on the same computer. It adds no AWS calls and never falls back to Bedrock. It uses the real Strands SDK and guarded action tools. A September 11 Mac run with `qwen3:8b` completed all three synthetic cases; its original [reports, logs, and matching source were reviewed](verification_2026-09-11.md).
 
-主催者は特定モデルを指定していません。この経路は、同じPC内のOllamaとStrandsを使います。AWSに自動切替えはしません。Macでの実推論は今回まだ確認していません。
+主催者は特定モデルを指定していません。この経路は、同じPC内のOllamaとStrandsを使います。AWSに自動切替えはしません。9月11日にMacのqwen3:8bで成功した3ケースのログと実行時ソースを照合しました。
 
 ## 1. Check an existing model without generation / 既存モデルの確認
 

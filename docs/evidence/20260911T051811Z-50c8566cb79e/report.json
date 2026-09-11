@@ -1,0 +1,83 @@
+{
+  "schema_version": 2,
+  "run_id": "20260911T051811Z-50c8566cb79e",
+  "created_at": "2026-09-11T05:18:11.450393+00:00",
+  "mode": "live",
+  "synthetic_data_only": true,
+  "is_live_evidence": false,
+  "is_live_agent_evidence": true,
+  "verified": true,
+  "model_provider": "ollama",
+  "model_id": "qwen3:8b",
+  "region": null,
+  "source_sha256": {
+    "agent.py": "2d2b875a0fa3fc6aae4cd6cbbba8ce997a272249dca11a73311f0161c516cc77",
+    "bedrock_preflight.py": "caef3dfeb683155059b810666c6c63a5a5547c06be2d217ad449f968e0594812",
+    "check_local_setup.py": "8b09f1bd74d25fba76ff93bc33dde2d9b9f66ac2ee3ad3137bedd1fa6ddfbf58",
+    "demo.py": "ad2ca5e8670237632cf4e2fe8c95d6f7dbc745ebddf986158dd7266623559aa7",
+    "execution.py": "43e1b9f836551091e892dc61976f755c1d06a136a27b870faa48e1c7c4ca7dee",
+    "handoff.py": "4bf0223a2263338277d3ebf5f362ea04ddc4498dc1164d045dc5d72c84f6fb19",
+    "local_model.py": "3cdad1d3e67d26d79013f830146c6fb794ca037a85520b732a00293a012f83ad",
+    "model_config.py": "4d09e92084363a832bc1b0d434fab4c006b6300e05b9282fddcf6e2583ed673b",
+    "qc_policy.py": "c6fabf6f31f479bb9afa237944f5b0bcb0a0eb48717cf2e12ab4788d6a9ef236",
+    "report_view.py": "8e162c3ea941313edbf9aa473ff227127dacea60e52e2540907f5757472f1a75"
+  },
+  "cases": [
+    {
+      "sample": "high_confidence_event.json",
+      "sample_sha256": "f97c6748737ec613cf55109742c095d00ea080ec38711ac006354891ef0854f7",
+      "bedrock_called": false,
+      "bedrock_attempted": false,
+      "model_called": true,
+      "control_status": "PASS",
+      "expected_action": "record_observation",
+      "completed_action": "record_observation",
+      "tool_attempts": 1,
+      "execution_failed": false,
+      "verified": true,
+      "execution": "strands_ollama"
+    },
+    {
+      "sample": "uncertain_event.json",
+      "sample_sha256": "469cb7a588d38655e2679a13313209d645f99b4c636302ad8cb8101aaf8c97bb",
+      "bedrock_called": false,
+      "bedrock_attempted": false,
+      "model_called": true,
+      "control_status": "HOLD",
+      "expected_action": "request_caregiver_confirmation",
+      "completed_action": "request_caregiver_confirmation",
+      "tool_attempts": 1,
+      "execution_failed": false,
+      "verified": true,
+      "execution": "strands_ollama"
+    },
+    {
+      "sample": "bad_signal_event.json",
+      "sample_sha256": "4ce3ee26d19053c4e8fd0e4a458bac3ffabea1091e3f054b5179785cea3eac3f",
+      "bedrock_called": false,
+      "bedrock_attempted": false,
+      "model_called": true,
+      "control_status": "STOP",
+      "expected_action": "stop_and_check_signal",
+      "completed_action": "stop_and_check_signal",
+      "tool_attempts": 1,
+      "execution_failed": false,
+      "verified": true,
+      "execution": "strands_ollama"
+    }
+  ],
+  "strands_version": "1.55.1",
+  "log_counts": {
+    "event_log.jsonl": 1,
+    "confirmation_queue.jsonl": 1,
+    "system_alerts.jsonl": 1
+  },
+  "handoff": {
+    "date": "2026-08-18",
+    "observation_count": 1,
+    "relative_amount_counts": {
+      "medium": 1
+    },
+    "note": "Observation support only; this summary is not a medical diagnosis and does not prove that an unobserved bowel movement did not occur."
+  }
+}

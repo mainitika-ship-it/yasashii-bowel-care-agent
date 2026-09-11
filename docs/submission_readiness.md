@@ -10,12 +10,12 @@ Official requirements and the current Devpost entry were freshly checked on Sept
 
 | Requirement | Status | Evidence / next action |
 |---|---|---|
-| Working agent built with Strands Agents SDK | LOCAL SUCCESS REPORTED / ARTIFACT REVIEW PENDING | A September 11 screenshot reports a successful local `qwen3:8b` three-case run, one PASS-only handoff, and 108 passing tests. Obtain the original reports, logs, and exact source before independently verifying this claim; see the evidence handoff below. |
-| Public code repository | DONE | https://github.com/mainitika-ship-it/yasashii-bowel-care-agent is public. Root source and READMEs verified at commit `02191d53a787a050b955a6fa8260a10777298a6c`; [CI passed](https://github.com/mainitika-ship-it/yasashii-bowel-care-agent/actions/runs/34472636948). Devpost's repository field still needs owner-reviewed updating. |
+| Working agent built with Strands Agents SDK | DONE FOR THREE SYNTHETIC CASES | Original Mac `qwen3:8b` reports and logs reviewed: PASS / HOLD / STOP, one matching action per case, one PASS-only handoff. All 10 source hashes and three input hashes match the imported code. See [the evidence review](verification_2026-09-11.md). |
+| Public code repository | DONE | https://github.com/mainitika-ship-it/yasashii-bowel-care-agent is public, with root README and MIT license. The reviewed Mac prompt correction and original synthetic evidence are included. Devpost's repository field still needs owner-reviewed updating. |
 | README | DONE | Setup, architecture, safety, pre-existing disclosure, and demo commands are documented. |
 | MIT or Apache license | DONE | Root `LICENSE` is published. GitHub repository metadata identifies its license as MIT (`spdx_id: MIT`), verified 2026-09-10. |
 | Architecture diagram | FILE READY / UPLOAD UNVERIFIED | [architecture.png](architecture.png) matches the current implementation and is in an accepted attachment format. Upload/recheck the final file on Devpost. |
-| Demo video, max 5 minutes | NOT STARTED | Record only after the live end-to-end flow is stable. See `docs/demo_storyboard.md`. |
+| Demo video, max 5 minutes | NO PUBLIC VIDEO PROVIDED | Next: record the verified build and explain its three outcomes. See `docs/demo_storyboard.md`. A saved HTML report is not a video. |
 | AWS Builder ID | PREVIOUSLY DONE | Prior record says it was entered; recheck the final required field before Submit. |
 | Problem / audience / why it matters | DONE | Present in Devpost story and README. |
 | English or English translation | TEXT READY / VIDEO PENDING | README and PNG are in English; the public video must also use English narration or translation. |
@@ -23,24 +23,13 @@ Official requirements and the current Devpost entry were freshly checked on Sept
 
 ## Core implementation gate
 
-### September 11 local run: preserve before changing anything
+### September 11 local run: original evidence received and reviewed
 
-The owner's screenshot shows the Mac-local coding session reporting:
+Run `20260911T051811Z-50c8566cb79e` completed the three synthetic cases with local `qwen3:8b`. The handoff ZIP has been received and checked: all 28 manifest entries and all 13 source/input run-time hashes match; the three logs agree with the samples and QC actions; HOLD stays pending; the saved handoff counts one PASS observation. The original HTML matches the JSON rendered with the recorded source.
 
-- a live `qwen3:8b` PASS / HOLD / STOP run, with one record per case;
-- a pending HOLD and one PASS observation in the handoff;
-- 108 passing tests and a separate check of logs, source/sample hashes, and the report banner;
-- a prompt-only change with the safety guards retained.
+The exact prompt correction was imported. It explains that tool arguments must be `{}` and that the event is already bound to the tool. AST comparison confirms no other executable source change; the argument, action, duplicate-write, model-cycle, and privacy guards remain in place. Original evidence and provenance limits are documented in [the September 11 review](verification_2026-09-11.md).
 
-The displayed run directory is `runtime/demo/20260911T051811Z-50c8566cb79e`. **These are screenshot-reported results.** The report files, log contents, and local source change have not yet been received or independently reviewed here. The public source at `ff03843bb229a47ddfc736a6e4e56113b6e446e1` is not yet confirmed to match that run. A successful synthetic demonstration is not validation for real care use.
-
-Next, use the existing Mac-local session to preserve the successful run rather than repeat it:
-
-1. Read the existing `report.json`, `report.html`, and three synthetic JSONL logs; keep the originals untouched. Check `verified`, `is_live_agent_evidence`, provider/model, tool receipts, the pending HOLD, and the single PASS-only handoff against the actual files. For Ollama, a false legacy `is_live_evidence` value is expected.
-2. Compare the report's `source_sha256` and sample hashes with the current files. Preserve the matching source, synthetic samples, dependency requirement files, and the exact prompt change. If any file has changed since the run, record the mismatch and do not label the current source as the executed version.
-3. Create a new ZIP under the project's ignored `runtime/` directory with only the selected evidence and source files, plus a short verification/change note and reproduction command. Exclude credentials, environments, unrelated files, real care data, and raw service logs. Do not invoke a model or publish the evidence while packaging. Reveal the ZIP in Finder for owner sharing and review.
-
-After receiving this package, reconcile the prompt change with the public repository, review the evidence, then prepare the public recording from the verified build. Do not mark the working-agent gate complete solely from this screenshot.
+This closes the original-file handoff task. No inference was repeated to review or import the bundle. A successful synthetic demonstration is not validation for real care use. The next submission artifact is the public video.
 
 ### Reproduction checks when a new run is needed
 
@@ -50,7 +39,7 @@ For the working-agent portion of the video, complete these three checks:
 2. `python src/demo.py --mode qc` shows PASS, HOLD, STOP in that order.
 3. Run `python src/demo.py --mode live --provider ollama --model-id YOUR_INSTALLED_MODEL` or the Bedrock command `python src/demo.py --mode live --allow-paid-model`. A fresh report must have `verified=true`, `is_live_agent_evidence=true`, and one matching tool for each case. The older `is_live_evidence` field is Bedrock-only and is false for local Ollama.
 
-The local-vision connection is a separate project integration goal, not an additional official requirement or evidence already achieved. Show and label synthetic input in the public demo; do not claim camera integration. The offline demo, guarded writes, SDK scripted-model tests, and standalone packaging are implemented; see [`verification_2026-09-10.md`](verification_2026-09-10.md). That September 10 verification did not run real-model inference or final Devpost Submit; the separate September 11 local report is recorded above with its evidence limits.
+The local-vision connection is a separate project integration goal, not an additional official requirement or evidence already achieved. Show and label synthetic input in the public demo; do not claim camera integration. The offline demo, guarded writes, SDK scripted-model tests, and standalone packaging are implemented; see [`verification_2026-09-10.md`](verification_2026-09-10.md). The separate [September 11 review](verification_2026-09-11.md) covers the original local-model report and its evidence limits. Final Devpost Submit remains an owner action.
 
 The current build also generates a bilingual, read-only `report.html` for each offline or live demo attempt. It makes pending review and safety stops visible without pretending to implement caregiver approval. See [Japanese execution guide](../README_JA.md). The report screen is preparation for recording; no public demo video has yet been produced.
 

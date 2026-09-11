@@ -23,6 +23,13 @@ PUBLIC_FILES = (
     "docs/architecture.md", "docs/demo_storyboard.md", "docs/publication_safety.md",
     "docs/qc_method.md", "docs/submission_readiness.md", "docs/repository_transfer.md",
     "docs/verification_2026-09-10.md",
+    "docs/verification_2026-09-11.md",
+    "docs/evidence/20260911T051811Z-50c8566cb79e/report.json",
+    "docs/evidence/20260911T051811Z-50c8566cb79e/report.html",
+    "docs/evidence/20260911T051811Z-50c8566cb79e/event_log.jsonl",
+    "docs/evidence/20260911T051811Z-50c8566cb79e/confirmation_queue.jsonl",
+    "docs/evidence/20260911T051811Z-50c8566cb79e/system_alerts.jsonl",
+    "docs/evidence/20260911T051811Z-50c8566cb79e/handoff.json",
     "docs/architecture.png", "docs/hackathon_recheck.md", "docs/local_model_guide.md",
     "sample_data/bad_signal_event.json", "sample_data/high_confidence_event.json",
     "sample_data/sample_event.json", "sample_data/uncertain_event.json",
@@ -67,7 +74,7 @@ def export_submission(output: str | Path, project_root: Path = PROJECT_ROOT) -> 
     files[".github/workflows/ci.yml"] = files["tools/standalone-ci.yml"]
     manifest = {"schema_version": 1, "files_sha256": {
         name: hashlib.sha256(data).hexdigest() for name, data in sorted(files.items())
-    }, "note": "Source packaging only; this is not live Bedrock or submission evidence."}
+    }, "note": "Packaging integrity only. Includes a reviewed historical synthetic Ollama run; packaging performs no model execution or final submission."}
     files["PUBLIC_MANIFEST.json"] = (json.dumps(manifest, indent=2) + "\n").encode()
     output = Path(output)
     if output.suffix != ".zip":

@@ -8,6 +8,9 @@ runtime/
 dist/
 data/
 *.jsonl
+!docs/evidence/20260911T051811Z-50c8566cb79e/event_log.jsonl
+!docs/evidence/20260911T051811Z-50c8566cb79e/confirmation_queue.jsonl
+!docs/evidence/20260911T051811Z-50c8566cb79e/system_alerts.jsonl
 *.csv
 .DS_Store
 .idea/

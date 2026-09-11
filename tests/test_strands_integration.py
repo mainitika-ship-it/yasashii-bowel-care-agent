@@ -62,6 +62,7 @@ def test_real_strands_sdk_calls_the_bound_tool(tmp_path, monkeypatch, overrides)
 @pytest.mark.parametrize("action,inputs,repeat", [
     ("stop_and_check_signal", {}, False),
     ("record_observation", {"amount": "large"}, False),
+    ("record_observation", {"event": make_event().to_dict()}, False),
     ("record_observation", {}, True),
 ])
 def test_real_sdk_rejects_wrong_injected_or_duplicate_call(tmp_path, monkeypatch, action, inputs, repeat):

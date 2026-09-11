@@ -9,12 +9,14 @@ A privacy-first AI agent for family caregivers, prepared for the **Agents for Hu
 The project turns a minimal, non-identifying observation from a local vision layer into one of three safe actions:
 
 - **PASS** — quietly record a high-confidence observation;
-- **HOLD** — ask a caregiver for `Yes / No / Hold`;
+- **HOLD** — queue the uncertain observation for caregiver review; approval controls are not yet implemented;
 - **STOP** — stop automation when signal health or privacy controls fail.
 
 It is an observation and handoff aid, **not a medical diagnostic device**.
 
 **Start here:** `python src/demo.py --mode offline` runs the synthetic observation → QC → local action → handoff loop without AWS, credentials, or installed packages. Open the printed `view_path` (`report.html`) in a browser for an English/Japanese result screen. It explicitly labels offline results **not live Bedrock evidence**.
+
+**Reviewed live demo, September 11:** the owner's Mac completed PASS / HOLD / STOP with Strands and local `qwen3:8b`, with one matching tool action per case and one PASS-only handoff. The [original reports, logs, and source-hash review](docs/verification_2026-09-11.md) are available. The current production source matches the recorded run. This is a synthetic demonstration; camera integration and real care use remain unverified.
 
 Canonical submission source: **https://github.com/mainitika-ship-it/yasashii-bowel-care-agent**. This dedicated repository contains this project's README and MIT license at the root. It was copied from the reviewed YBCA project folder; unrelated projects and their Git history were not imported.
 
@@ -33,7 +35,7 @@ The hackathon work adds:
 - a **Strands Agents SDK** orchestration layer;
 - explicit model configuration for Amazon Bedrock or an installed local Ollama model;
 - an explainable confidence and quality-control policy;
-- human confirmation for uncertain observations;
+- a pending caregiver-review queue for uncertain observations;
 - safe stop behavior when privacy or signal checks fail;
 - privacy-minimized event logging;
 - daily handoff summaries;
@@ -70,7 +72,7 @@ More detail: [`docs/architecture.md`](docs/architecture.md). The [PNG diagram](d
 
 ## Choose a model route
 
-**Strands Agents SDK is required; a specific model or Bedrock is not.** See the [official requirement recheck](docs/hackathon_recheck.md), including the host's September 9 clarification. The local route connects to an already installed, tool-capable Ollama model. The Bedrock route requires explicit permission for paid calls. Neither route has a verified real-model three-case run from this build environment yet.
+**Strands Agents SDK is required; a specific model or Bedrock is not.** See the [official requirement recheck](docs/hackathon_recheck.md), including the host's September 9 clarification. The local route connects to an already installed, tool-capable Ollama model. The [reviewed Mac run](docs/verification_2026-09-11.md) used `qwen3:8b`; Bedrock remains an alternative requiring explicit permission for paid calls and has not been live-verified here.
 
 ## Default Bedrock model
 

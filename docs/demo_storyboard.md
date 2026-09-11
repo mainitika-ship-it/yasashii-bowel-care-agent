@@ -2,7 +2,7 @@
 
 The event allows a maximum 5-minute video. This storyboard leaves buffer for upload / playback differences.
 
-Before recording, capture a successful three-case run with a real tool-capable model. Strands is mandatory; Bedrock is optional. Use one route for the whole recording and show its honest execution-mode banner. The implementation currently has SDK tests, not a recorded real-model run. Use [architecture.png](architecture.png) as the matching visual.
+The September 11 Mac run with Strands and `qwen3:8b` now has [reviewed original evidence and matching source](verification_2026-09-11.md). A public video is still needed. Strands is mandatory; Bedrock is optional. Use one route for the whole recording and show its honest execution-mode banner. Use [architecture.png](architecture.png) as the matching visual. Preserved results may be shown as results from that recorded run; do not imply that opening a saved report launches a model.
 
 ## 0:00–0:30 — Problem
 

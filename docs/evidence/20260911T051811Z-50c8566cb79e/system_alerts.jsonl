@@ -1,0 +1,1 @@
+{"action": "stop_and_check_signal", "timestamp": "2026-08-18T19:20:00+09:00", "control_status": "STOP", "reason_codes": ["camera_or_signal_health_check_failed"], "processed_at": "2026-09-11T05:18:54.674174+00:00"}

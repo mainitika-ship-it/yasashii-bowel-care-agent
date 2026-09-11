@@ -1,0 +1,1 @@
+{"action": "request_caregiver_confirmation", "timestamp": "2026-08-18T19:00:00+09:00", "control_status": "HOLD", "reason_codes": ["confidence_below_control_threshold"], "processed_at": "2026-09-11T05:18:34.719347+00:00", "suggested_amount": "small", "confirmation_status": "pending"}
