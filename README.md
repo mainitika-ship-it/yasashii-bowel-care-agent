@@ -274,7 +274,7 @@ See [`docs/publication_safety.md`](docs/publication_safety.md).
 
 Current status is tracked in [`docs/submission_readiness.md`](docs/submission_readiness.md).
 
-**Prepared:** the saved three-case Mac run has been reviewed. A completed video candidate, `ybca-submission-candidate.mp4`, has English narration, Japanese-above-English captions, and gentle explanatory humor. It presents actual offline output and saved Mac AI results, labelled separately; it is not live inference footage. The video file is prepared outside this source repository; its public playback URL is still outstanding. Exact duration is omitted pending confirmation of the owner's intended final file.
+**Prepared:** the saved three-case Mac run has been reviewed. The current video candidate, `ybca-voice-refined.mp4`, is **235.833 seconds (about 3:56)**, with English narration, Japanese-above-English captions, and gentle explanatory humor. The owner-requested audio refinement slightly increases speech tempo while preserving the picture and caption timing. It presents actual offline output and saved Mac AI results, labelled separately; it is not live inference footage. The video file is prepared outside this source repository; its public playback URL is still outstanding.
 
 **Public introduction updated:** the [Devpost project page](https://devpost.com/software/yasashii-bowel-care-agent) now describes the synthetic prototype, evidence, and limits. Updating that page does not perform the hackathon's final Submit.
 
