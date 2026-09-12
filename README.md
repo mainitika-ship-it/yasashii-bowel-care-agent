@@ -4,9 +4,11 @@
 
 [Official requirement recheck](docs/hackathon_recheck.md) · [Local model route](docs/local_model_guide.md) · [Architecture PNG](docs/architecture.png)
 
-A privacy-first AI agent for family caregivers, prepared for the **Agents for Humans Hackathon**.
+A gentle AI prototype for family caregivers, prepared for the **Agents for Humans Hackathon**.
 
-The project turns a minimal, non-identifying observation from a local vision layer into one of three safe actions:
+Family caregivers have so much to remember: what they observed, what needs recording, and what the next caregiver needs to know. Yasashii aims to make bowel-observation records and handoffs clearer while keeping uncertainty visible and people in charge.
+
+The demonstrated prototype turns a prepared, non-identifying synthetic observation into one of three guarded actions. Integration with the separate local vision prototype remains unverified:
 
 - **PASS** — quietly record a high-confidence observation;
 - **HOLD** — queue the uncertain observation for caregiver review; approval controls are not yet implemented;
@@ -14,9 +16,11 @@ The project turns a minimal, non-identifying observation from a local vision lay
 
 It is an observation and handoff aid, **not a medical diagnostic device**.
 
+**How the AI helps:** fixed rules check the input first. A **Strands Agents SDK** agent selects a tool, and an execution guard allows only the action permitted by those rules. PASS enters the observation record and handoff; HOLD stays pending for a person; STOP creates a separate safety alert. The caregiver approval screen is not implemented yet.
+
 **Start here:** `python src/demo.py --mode offline` runs the synthetic observation → QC → local action → handoff loop without AWS, credentials, or installed packages. Open the printed `view_path` (`report.html`) in a browser for an English/Japanese result screen. It explicitly labels offline results **not live Bedrock evidence**.
 
-**Reviewed live demo, September 11:** the owner's Mac completed PASS / HOLD / STOP with Strands and local `qwen3:8b`, with one matching tool action per case and one PASS-only handoff. The [original reports, logs, and source-hash review](docs/verification_2026-09-11.md) are available. The current production source matches the recorded run. This is a synthetic demonstration; camera integration and real care use remain unverified.
+**Reviewed live demo, September 11:** the owner's Mac completed PASS / HOLD / STOP with Strands Agents SDK, Ollama, and local `qwen3:8b`, with one matching tool action per case and one PASS-only handoff. The [original reports, logs, and source-hash review](docs/verification_2026-09-11.md) are available: 13 source/input hashes matched, and 109 automated tests passed separately using scripted models. The current production source matches the recorded run. This is a synthetic demonstration; real camera integration, real-image detection performance, real-care benefits, and clinical safety remain unverified.
 
 Canonical submission source: **https://github.com/mainitika-ship-it/yasashii-bowel-care-agent**. This dedicated repository contains this project's README and MIT license at the root. It was copied from the reviewed YBCA project folder; unrelated projects and their Git history were not imported.
 
@@ -270,12 +274,15 @@ See [`docs/publication_safety.md`](docs/publication_safety.md).
 
 Current status is tracked in [`docs/submission_readiness.md`](docs/submission_readiness.md).
 
-Still required before final submission:
+**Prepared:** the saved three-case Mac run has been reviewed. A completed video candidate, `ybca-submission-candidate.mp4`, has English narration, Japanese-above-English captions, and gentle explanatory humor. It presents actual offline output and saved Mac AI results, labelled separately; it is not live inference footage. The video file is prepared outside this source repository; its public playback URL is still outstanding. Exact duration is omitted pending confirmation of the owner's intended final file.
 
-- successfully run and capture the **live Strands + tool-capable model** three-case demo (local Ollama or Bedrock);
-- record a public demo video of at most 5 minutes;
-- copy this dedicated repository URL into Devpost; the existing project still points to the old repository folder;
-- upload the matching architecture diagram and recheck all required fields, including AWS Builder ID;
+**Public introduction updated:** the [Devpost project page](https://devpost.com/software/yasashii-bowel-care-agent) now describes the synthetic prototype, evidence, and limits. Updating that page does not perform the hackathon's final Submit.
+
+Remaining before final submission, checked September 12:
+
+- publish the prepared video, check anonymous playback, and register its URL;
+- update the hackathon's code-repository field to this dedicated repository; the live entry still points to the old repository folder;
+- verify the architecture file attachment and required answers, including AWS Builder ID, track, submitter type, and country;
 - complete owner verification and final Submit by **September 15, 2026, 09:00 JST**.
 
 The physical camera connection is a separate integration goal. This submission demonstrates synthetic event input; do not claim verified camera integration or continuous monitoring.
@@ -290,10 +297,9 @@ Optional score boosters after the core flow works:
 
 - Python
 - Strands Agents SDK
-- Amazon Bedrock
-- Amazon Nova Lite
-- Ollama (optional local provider; real inference remains to be verified)
-- structured computer-vision event inputs
+- Ollama + qwen3:8b (saved synthetic Mac run verified)
+- Amazon Bedrock / Amazon Nova Lite (alternative configured route; successful live execution unverified)
+- synthetic structured observation inputs; camera connection unverified
 - JSONL / local event logging
 - Pytest
 
