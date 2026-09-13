@@ -1,10 +1,10 @@
 # Agents for Humans Hackathon — Submission Readiness
 
-Updated: 2026-09-12 (saved technical evidence, prepared video, and live Devpost checks)
+Updated: 2026-09-13 (live Devpost readback, owner screenshot, saved-evidence recheck, and fresh offline run)
 
 This file is the project-side checklist for the final Devpost submission. It is intentionally conservative: an item is marked complete only when it has been verified, not merely planned.
 
-The [official requirements](https://agentsforhumans.devpost.com/) and current Devpost entry were checked again on September 12. **Strands is required, but Bedrock or a specific model is not.** Deadline: **2026-09-15 09:00 JST**. The public project tagline and description have been updated and read back successfully. The video URL remains empty and the hackathon `submitted_at` value remains unset; a published project page is not a final hackathon submission. The [earlier recheck record](hackathon_recheck.md) remains dated historical context.
+The [official requirements](https://agentsforhumans.devpost.com/) and current Devpost entry were checked again on September 13. **Strands is required, but Bedrock or a specific model is not.** The live deadline is **2026-09-15 00:00 UTC / 09:00 JST**. The public description, [YouTube video URL](https://www.youtube.com/watch?v=Cuf4LXeQJCU), and dedicated repository link were read back successfully. The project-specific hackathon `submitted_at` remains unset; a published page and the connection's broad `submitted` relationship do not prove final Submit. Earlier empty-video/old-repository notes are historical, not current tasks.
 
 ## Required by the event
 
@@ -13,15 +13,28 @@ The [official requirements](https://agentsforhumans.devpost.com/) and current De
 | Requirement | Status | Evidence / next action |
 |---|---|---|
 | Working agent built with Strands Agents SDK | DONE FOR THREE SYNTHETIC CASES | Original Mac `qwen3:8b` reports and logs reviewed: PASS / HOLD / STOP, one matching action per case, one PASS-only handoff. All 10 source hashes and three input hashes match the imported code. See [the evidence review](verification_2026-09-11.md). |
-| Public code repository | DONE | https://github.com/mainitika-ship-it/yasashii-bowel-care-agent is public, with root README and MIT license. The reviewed Mac prompt correction and original synthetic evidence are included. Devpost's repository field still needs owner-reviewed updating. |
+| Public code repository | PUBLIC / DEVPOST LINK VERIFIED | https://github.com/mainitika-ship-it/yasashii-bowel-care-agent is public, with root README and MIT license. The connected project entry now lists this dedicated repository. The custom-answer field itself is not exposed; check that lower form field if it is shown. |
 | README | DONE | Setup, architecture, safety, pre-existing disclosure, and demo commands are documented. |
-| MIT or Apache license | DONE | Root `LICENSE` contains the MIT license. Repository license metadata was checked previously on September 10; it was not returned by the September 12 metadata read. |
+| MIT or Apache license | DONE | Root `LICENSE` contains MIT; GitHub repository metadata again reports `spdx_id: MIT` on September 13. |
 | Architecture diagram | FILE READY / UPLOAD UNVERIFIED | [architecture.png](architecture.png) matches the current implementation and is in an accepted attachment format. Upload/recheck the final file on Devpost. |
-| Demo video, max 5 minutes | CANDIDATE VERIFIED UNDER 5 MIN / PUBLIC URL MISSING | `ybca-voice-refined.mp4`: measured 235.833 seconds (about 3:56), English narration, Japanese-above-English captions, actual offline output and saved Mac results. Publish the prepared file, check anonymous playback, and register the URL. |
+| Demo video, max 5 minutes | DEVPOST URL VERIFIED / OWNER VIEWING REPORTED | The [YouTube URL](https://www.youtube.com/watch?v=Cuf4LXeQJCU) is present in the live Devpost video field. The owner reports viewing it. Local `ybca-voice-refined.mp4` was remeasured at 235.833 seconds (about 3:56); this is not a new measurement of the YouTube stream. Exact uploaded-version correspondence and independent full playback/audio verification remain unconfirmed here. |
 | AWS Builder ID | PREVIOUSLY DONE | Prior record says it was entered; recheck the final required field before Submit. |
 | Problem / audience / why it matters | DONE | Updated public Devpost introduction explains family-care burden, the synthetic workflow, evidence, and limits. |
-| English or English translation | FILES READY | README, PNG and Devpost text are in English. The prepared video has English narration and Japanese-above-English captions; public playback remains to be checked. |
-| Required fields and final Submit | NOT COMPLETE | Current Devpost repository URL still points to the old parent folder. Submitter type, country, track, source URL, architecture upload, and AWS Builder ID must be checked by the owner. |
+| English or English translation | FILES READY / OWNER VIDEO CHECK REPORTED | README, PNG and Devpost text are in English. The local video has English narration and Japanese-above-English captions. Owner viewing is reported separately from independent playback testing. |
+| Required fields and final Submit | NOT COMPLETE | Latest owner screenshot shows submitter type and country selected, and a check on Additional info, but not the lower fields. Track, the architecture attachment, and AWS Builder ID require content-level checking. Earlier Project details was unchecked. Final Submit remains unperformed. |
+
+## September 13 technical recheck
+
+- Compared local files against public commit `58c2d19227c11eb5d98a73a935e445351d34dfeb`: source, tests, inputs, evidence, requirements, and architecture bytes match. Documentation changes are reviewed separately.
+- Recomputed **13/13 source/input hashes** against the saved Mac report; all match.
+- Confirmed saved PASS / HOLD / STOP receipts, three separate one-record logs, pending HOLD, and a handoff containing only **one PASS observation**.
+- Regenerated the saved HTML in memory; it matches the original HTML exactly.
+- Ran a **fresh offline** three-case pipeline successfully, without a model or AWS call. This is not a new live-model run.
+- The [CI run for the public commit](https://github.com/mainitika-ship-it/yasashii-bowel-care-agent/actions/runs/34735097422) completed successfully, including automated tests, offline execution, and packaging. The **109-test** count is the preserved regression result; the full pytest suite was not rerun locally in this recheck.
+
+## Next owner operation
+
+On **Additional info**, scroll down and check the track, code URL, required architecture file, and AWS Builder ID. Do not infer their correctness from the section checkmark. Then return to **Project details** and check any required field or validation message before saving. The screenshots do not yet identify why that stage is incomplete. Final Submit remains a separate owner-confirmed action.
 
 ## Core implementation gate
 
@@ -31,7 +44,7 @@ Run `20260911T051811Z-50c8566cb79e` completed the three synthetic cases with loc
 
 The exact prompt correction was imported. It explains that tool arguments must be `{}` and that the event is already bound to the tool. AST comparison confirms no other executable source change; the argument, action, duplicate-write, model-cycle, and privacy guards remain in place. Original evidence and provenance limits are documented in [the September 11 review](verification_2026-09-11.md).
 
-This closes the original-file handoff task. No inference was repeated to review or import the bundle. A successful synthetic demonstration is not validation for real care use. The next submission artifact is the public video.
+This closes the original-file handoff task. No inference was repeated to review or import the bundle. A successful synthetic demonstration is not validation for real care use. Video registration has since been verified; the remaining task is final form review.
 
 ### Reproduction checks when a new run is needed
 
@@ -45,13 +58,13 @@ The local-vision connection is a separate project integration goal, not an addit
 
 The current build also generates a bilingual, read-only `report.html` for each offline or live demo attempt. It makes pending review and safety stops visible without pretending to implement caregiver approval. See [Japanese execution guide](../README_JA.md).
 
-### Prepared video and remaining publication step
+### Local video provenance and public-registration status
 
 The owner-approved video has 20 scenes and 43 bilingual caption intervals. Gentle explanatory dialogue supports the story without presenting the guide's lines as actual agent speech. Actual offline output and saved Mac model results are labelled separately; no live inference screen recording is claimed.
 
-Current reviewed file: `ybca-voice-refined.mp4`, 1280 x 720, **235.833 seconds (about 3:56)**. SHA-256: `c7ec081f2059d8b032a06e358b330aadea2fee4b44d4aa37d29e6cd5ac697c3a`. This file is prepared outside the source repository; no public video URL is available yet. The owner supplied a 235.836667-second copy, whose content matched the original master across all 43 caption intervals. The requested audio refinement uses 4% faster speech, gentle equalization and a quieter music mix; the picture and burned-in caption stream remain identical to the verified master. Full AV decoding passed and all 43 speech segments fit their original caption intervals. Original visual checks covered 390/640-pixel review and QR decoding. Physical-device playback and independent listening evaluation remain unverified; these checks do not establish real-care benefit.
+Current reviewed local file: `ybca-voice-refined.mp4`, 1280 x 720, **235.833 seconds (about 3:56)**. SHA-256: `c7ec081f2059d8b032a06e358b330aadea2fee4b44d4aa37d29e6cd5ac697c3a`. This file is prepared outside the source repository. The [public YouTube URL](https://www.youtube.com/watch?v=Cuf4LXeQJCU) is now registered on Devpost, and the owner reports viewing the video. Matching duration alone does not establish that the voice-refined version was uploaded; exact correspondence and independent listening/full-playback checks remain unconfirmed here. The owner supplied a 235.836667-second copy, whose content matched the original master across all 43 caption intervals. The requested audio refinement uses 4% faster speech, gentle equalization and a quieter music mix; the picture and burned-in caption stream remain identical to the verified master. Saved local checks report full AV decoding passed and all 43 speech segments fit their original caption intervals. Original visual checks covered 390/640-pixel review and QR decoding. These checks do not establish real-care benefit.
 
-The project owner's preparation package also contains the matching architecture PNG and original synthetic evidence. This is a convenience package, not an additional official ZIP requirement. Final video publication, required-field checks, and Submit remain separate actions.
+The project owner's preparation package also contains the matching architecture PNG and original synthetic evidence. This is a convenience package, not an additional official ZIP requirement. Required-field checks and final Submit remain separate actions; the existing video URL does not need to be published again merely to complete this checklist.
 
 The available project read exposes the video URL and project/hackathon links, but not all saved custom answers or attachment state. Architecture upload and AWS Builder ID therefore remain **unverified here**, not assumed absent or complete.
 
