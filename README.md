@@ -274,16 +274,19 @@ See [`docs/publication_safety.md`](docs/publication_safety.md).
 
 Current status is tracked in [`docs/submission_readiness.md`](docs/submission_readiness.md).
 
-**Prepared:** the saved three-case Mac run has been reviewed. The current video candidate, `ybca-voice-refined.mp4`, is **235.833 seconds (about 3:56)**, with English narration, Japanese-above-English captions, and gentle explanatory humor. The owner-requested audio refinement slightly increases speech tempo while preserving the picture and caption timing. It presents actual offline output and saved Mac AI results, labelled separately; it is not live inference footage. The video file is prepared outside this source repository; its public playback URL is still outstanding.
+**Video registered:** the [YouTube demo](https://www.youtube.com/watch?v=Cuf4LXeQJCU) is now registered in the Devpost project; this was read back on September 13. The owner reports having checked the video on YouTube. The local audio-refined file was measured again at **235.833 seconds (about 3:56)**. Its English narration, Japanese-above-English captions, and gentle explanatory humor accompany actual offline output and saved Mac AI results, labelled separately; they are not live inference footage. The public upload's exact correspondence to the audio-refined file and independent full-playback/audio verification remain unconfirmed here. Video registration does not perform final Submit.
 
 **Public introduction updated:** the [Devpost project page](https://devpost.com/software/yasashii-bowel-care-agent) now describes the synthetic prototype, evidence, and limits. Updating that page does not perform the hackathon's final Submit.
 
-Remaining before final submission, checked September 12:
+Remaining before final submission, checked September 13:
 
-- publish the prepared video, check anonymous playback, and register its URL;
-- update the hackathon's code-repository field to this dedicated repository; the live entry still points to the old repository folder;
-- verify the architecture file attachment and required answers, including AWS Builder ID, track, submitter type, and country;
+- check the saved required answers and architecture attachment on the submission form; the connected project read does not expose all custom answers;
+- review the incomplete Project details stage shown in the owner's screenshots: entered story text alone does not prove every required field is complete;
 - complete owner verification and final Submit by **September 15, 2026, 09:00 JST**.
+
+The connected Devpost entry now lists the dedicated repository and YouTube URL. The owner's latest screenshot shows submitter type and country selected, and a check on **Additional info**; it does not show the lower fields. Track, the required architecture attachment, and AWS Builder ID still need content-level confirmation, not assumptions based on that check. The project-specific hackathon `submitted_at` remains unset.
+
+**Rechecked without new inference:** all 13 saved source/input hashes match the current code and samples; the saved handoff still contains one PASS observation, with HOLD pending and STOP separate. A fresh offline three-case run also passed. The [September 13 CI run](https://github.com/mainitika-ship-it/yasashii-bowel-care-agent/actions/runs/34735097422) passed its automated tests, offline pipeline, and packaging checks. The documented 109-test result remains separate from the saved real-model run.
 
 The physical camera connection is a separate integration goal. This submission demonstrates synthetic event input; do not claim verified camera integration or continuous monitoring.
 
