@@ -6,7 +6,7 @@ Family care means remembering many small things: what happened, what to record, 
 
 **AI helps. People decide.** This is a synthetic-data prototype, not a finished care product or a medical diagnostic device.
 
-[▶ Watch the demo](https://www.youtube.com/watch?v=Cuf4LXeQJCU) · [日本語で読む](README_JA.md) · [Architecture](docs/architecture.md) · [Evidence](docs/verification_2026-09-11.md)
+[▶ Watch the demo](https://youtu.be/Oej2y-0PFN8) · [日本語で読む](README_JA.md) · [Architecture](docs/architecture.md) · [Evidence](docs/verification_2026-09-11.md)
 
 ## Three outcomes, one clear handoff
 
@@ -155,11 +155,11 @@ The hackathon work adds **Strands orchestration, the PASS / HOLD / STOP policy, 
 
 ## Watch, explore, reproduce
 
-- [Watch the public video](https://www.youtube.com/watch?v=Cuf4LXeQJCU): English narration; Japanese above English captions. Actual offline output and saved Mac results are labelled separately, not presented as live inference footage.
+- [Watch the public video](https://youtu.be/Oej2y-0PFN8): Owner-selected replacement video. The prepared storybook edition uses English above smaller Japanese text; it is an illustrated explanation, not continuous live inference footage.
 - [See the Devpost project](https://devpost.com/software/yasashii-bowel-care-agent): the problem, workflow, evidence and limits.
 - [Check preparation status](docs/submission_readiness.md): current form checks and remaining owner actions.
 
-The reviewed local audio-refined file is **235.833 seconds (about 3:56)**. The owner reports viewing the public video; exact file-to-upload correspondence remains unconfirmed here. Video registration is separate from final Submit.
+The new video URL was supplied by the owner. The prepared storybook edition is **3:14**; the public upload's duration and exact file correspondence have not been independently rechecked here. The earlier **235.833-second (about 3:56)** measurement belongs to the previous audio-refined edition, not this replacement. Updating GitHub links does not update the video registered on Devpost.
 
 **Technology that gently supports people.**
 
