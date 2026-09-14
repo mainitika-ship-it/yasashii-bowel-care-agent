@@ -1,6 +1,8 @@
 # Earlier storyboard — historical production plan
 
-> **Archived plan, not the current video or remaining-work list.** The [public video](https://www.youtube.com/watch?v=Cuf4LXeQJCU) is already registered on Devpost. The reviewed local audio-refined file is **235.833 seconds (about 3:56)**. This older plan targeted 4:30; its timing and “video still needed” notes describe the production stage only. For current work, use [submission readiness](submission_readiness.md). For the current design, use the [bilingual architecture](architecture.png).
+> **Video link update — September 14, 2026:** the viewing link now points to the owner's replacement video. The prepared replacement is 3:14 with English above smaller Japanese text; the upload itself has not been independently rechecked here. The status, duration, caption order and verification details below describe the earlier checkpoint/edition, not a new verification of this replacement. GitHub link changes do not update Devpost.
+
+> **Archived plan, not the current video or remaining-work list.** [Watch the replacement video](https://youtu.be/Oej2y-0PFN8). Its Devpost registration has not been checked in this update. The reviewed local audio-refined file is **235.833 seconds (about 3:56)**. This older plan targeted 4:30; its timing and “video still needed” notes describe the production stage only. For current work, use [submission readiness](submission_readiness.md). For the current design, use the [bilingual architecture](architecture.png).
 >
 > 制作時の旧案です。現在の公開動画・残作業・実測時間を示す資料ではありません。
 
