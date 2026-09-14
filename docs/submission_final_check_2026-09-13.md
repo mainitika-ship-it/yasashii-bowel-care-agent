@@ -1,5 +1,7 @@
 # Agents for Humans — Final Submission Check
 
+> **Video link update — September 14, 2026:** the viewing link now points to the owner's replacement video. The prepared replacement is 3:14 with English above smaller Japanese text; the upload itself has not been independently rechecked here. The status, duration, caption order and verification details below describe the earlier checkpoint/edition, not a new verification of this replacement. GitHub link changes do not update Devpost.
+
 Updated: 2026-09-13 JST
 
 This is a conservative final-submission checkpoint for **Yasashii Bowel Care Agent**. It records what has been verified and what still requires an owner-side check before Final Submit. It does not claim that the hackathon submission has been finalized.
@@ -29,7 +31,7 @@ AgentCore, a public live demo, and a builder.aws post can strengthen scoring but
 ## Verified current state
 
 - **Project description:** updated Devpost project text describes the family-care problem, audience, Strands workflow, synthetic-data scope, evidence, and limitations.
-- **Demo video:** Devpost project now points to the public YouTube video: https://www.youtube.com/watch?v=Cuf4LXeQJCU
+- **Demo video (historical checkpoint):** a prior video was registered on Devpost at this checkpoint. Current viewing link: https://youtu.be/Oej2y-0PFN8 — replacement registration on Devpost is not verified by this link update.
 - **Video duration:** prepared final candidate is about **3:56**, below the 5-minute limit.
 - **Canonical repository:** Devpost project now points to https://github.com/mainitika-ship-it/yasashii-bowel-care-agent
 - **Repository visibility:** public.
