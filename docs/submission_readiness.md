@@ -1,10 +1,12 @@
 # Submission readiness — what remains?
 
+> **Video link update — September 14, 2026:** the viewing link now points to the owner's replacement video. The prepared replacement is 3:14 with English above smaller Japanese text; the upload itself has not been independently rechecked here. The status, duration, caption order and verification details below describe the earlier checkpoint/edition, not a new verification of this replacement. GitHub link changes do not update Devpost.
+
 **Updated September 14, 2026. The project is still a draft for this hackathon. Final Submit is on hold while the owner reviews the unified materials.**
 
 提出資料を整えてから、本人が最終提出を判断します。
 
-[Watch the video](https://www.youtube.com/watch?v=Cuf4LXeQJCU) · [Read the project](https://devpost.com/software/yasashii-bowel-care-agent) · [Open the submission list](https://devpost.com/submit-to/30317-agents-for-humans-hackathon/manage/submissions)
+[Watch the video](https://youtu.be/Oej2y-0PFN8) · [Read the project](https://devpost.com/software/yasashii-bowel-care-agent) · [Open the submission list](https://devpost.com/submit-to/30317-agents-for-humans-hackathon/manage/submissions)
 
 ## Remaining owner actions
 
