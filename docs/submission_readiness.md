@@ -82,7 +82,7 @@ Local AV decoding, caption intervals, representative frames, small-screen review
 | Current entry point | Purpose |
 |---|---|
 | [English README](../README.md) / [Japanese README](../README_JA.md) | Understand the problem and try the three cases |
-| [Architecture](architecture.md) / [bilingual diagram](architecture-ja-en.png) | See QC, Strands, guarded tools and the three destinations |
+| [Architecture](architecture.md) / [bilingual diagram](architecture.png) | See QC, Strands, guarded tools and the three destinations |
 | [September 11 verification](verification_2026-09-11.md) | Inspect the original saved evidence |
 | This readiness table | See the current preparation status and remaining actions |
 | [Earlier storyboard](demo_storyboard.md) | Historical production plan, not the current remaining-work list |

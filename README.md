@@ -20,9 +20,9 @@ Family care means remembering many small things: what happened, what to record, 
 
 ## How it works
 
-![Synthetic input passes through QC, Strands and guarded tools. PASS enters the handoff; HOLD waits for a person; STOP becomes a separate alert.](docs/architecture-ja-en.png)
+![Synthetic input passes through QC, Strands and guarded tools. PASS enters the handoff; HOLD waits for a person; STOP becomes a separate alert.](docs/architecture.png)
 
-The diagram uses large English labels with Japanese underneath. [Open the full-size diagram](docs/architecture-ja-en.png) for the smaller notes.
+The diagram uses large English labels with Japanese underneath. [Open the full-size diagram](docs/architecture.png) for the smaller notes.
 
 1. **Check the input.** Fixed rules check its format, signal, privacy flag and uncertainty.
 2. **Choose an allowed action.** A **Strands Agents SDK** agent selects a tool.

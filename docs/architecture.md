@@ -4,9 +4,9 @@
 
 家族介護の記録を支え、不確かなときは人へ戻す構成です。
 
-![Yasashii: synthetic input, QC checks, Strands, guarded tools, then PASS record / HOLD pending / STOP alert. Only PASS enters the handoff.](architecture-ja-en.png)
+![Yasashii: synthetic input, QC checks, Strands, guarded tools, then PASS record / HOLD pending / STOP alert. Only PASS enters the handoff.](architecture.png)
 
-[Open the full-size diagram](architecture-ja-en.png) · [Try the workflow](../README.md#try-the-three-cases) · [Review the evidence](verification_2026-09-11.md)
+[Open the full-size diagram](architecture.png) · [Try the workflow](../README.md#try-the-three-cases) · [Review the evidence](verification_2026-09-11.md)
 
 This bilingual diagram uses English above Japanese, rounded cards and symbols as well as color. Its September 13 offline check is a dated result, not a claim of new inference. The same design is visible in the owner's September 14 Devpost attachment preview; that preview is not a byte-for-byte download verification.
 
@@ -78,8 +78,8 @@ The local route checks tool support and local GGUF metadata, uses numeric loopba
 The prototype supports observation and communication; it does not diagnose illness. Missing observations are not proof that no bowel movement occurred.
 
 <details>
-<summary>Earlier technical diagram</summary>
+<summary>Diagram history and rendering</summary>
 
-The [earlier English diagram](architecture.png) is retained as a historical technical asset. The current introduction and submission diagram is [architecture-ja-en.png](architecture-ja-en.png). The existing `tools/render_architecture.py` renders the earlier diagram; it does not recreate the new bilingual design.
+The current `architecture.png` is the bilingual design also supplied for the Devpost attachment. The [earlier English diagram](https://github.com/mainitika-ship-it/yasashii-bowel-care-agent/blob/4d3946bf8dc7d1d74a2b270642f9ab23c2ad78a9/docs/architecture.png) remains in repository history. The existing `tools/render_architecture.py` is the earlier renderer: rerunning it would replace the current image with that earlier design. It does not reproduce the new bilingual diagram.
 
 </details>

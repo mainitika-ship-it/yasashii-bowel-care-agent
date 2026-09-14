@@ -20,9 +20,9 @@
 
 ## どう動く？
 
-![模擬入力をQCで確認し、Strandsが操作を選び、ガードが許可された記録だけを実行する。PASSだけ申し送りへ。](docs/architecture-ja-en.png)
+![模擬入力をQCで確認し、Strandsが操作を選び、ガードが許可された記録だけを実行する。PASSだけ申し送りへ。](docs/architecture.png)
 
-大きい英語の下に、日本語を添えています。[図を大きく開く](docs/architecture-ja-en.png)
+大きい英語の下に、日本語を添えています。[図を大きく開く](docs/architecture.png)
 
 1. **ルールで先に確認**：入力の形式・信号・不確かさを確認。
 2. **AIが操作を選ぶ**：ここにStrands Agents SDKを使用。
