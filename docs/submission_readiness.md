@@ -1,25 +1,21 @@
-# Submission readiness — what remains?
+# Submission readiness — submitted
 
-> **Video link update — September 14, 2026:** the viewing link now points to the owner's replacement video. The prepared replacement is 3:14 with English above smaller Japanese text; the upload itself has not been independently rechecked here. The status, duration, caption order and verification details below describe the earlier checkpoint/edition, not a new verification of this replacement. GitHub link changes do not update Devpost.
+**Submitted to Agents for Humans Hackathon on September 14, 2026 at 12:36:19 JST.** The live Devpost project confirms `submitted_at: 2026-09-13T23:36:19.437-04:00`.
 
-**Updated September 14, 2026. The project is still a draft for this hackathon. Final Submit is on hold while the owner reviews the unified materials.**
+**提出済みです。** 以前の「下書き・未提出・最終Submit待ち」は提出前の記録です。
 
-提出資料を整えてから、本人が最終提出を判断します。
+[Watch the updated video](https://youtu.be/Oej2y-0PFN8) · [Read the project](https://devpost.com/software/yasashii-bowel-care-agent)
 
-[Watch the video](https://youtu.be/Oej2y-0PFN8) · [Read the project](https://devpost.com/software/yasashii-bowel-care-agent) · [Open the submission list](https://devpost.com/submit-to/30317-agents-for-humans-hackathon/manage/submissions)
+## Latest update — September 14, 2026
 
-## Remaining owner actions
+- **Video URL:** Devpost and GitHub now point to `Oej2y-0PFN8`; the saved Devpost value was read back.
+- **Caption description:** large English text above smaller Japanese translations, confirmed by reading back the Devpost description.
+- **Submission:** the original submission timestamp remains present. No additional Submit was performed.
+- **Prepared replacement:** the storybook edition is 3:14. Full public playback, audio, duration, thumbnail refresh and exact file correspondence were not independently verified in this update.
 
-| Action | Why it remains |
-|---|---|
-| **Confirm the corrected custom code URL was saved** | The Additional info screenshot still showed the old `kenji/tree/main/...` URL. The dedicated URL was supplied for replacement. The next screenshot reached Submit, but did not display the saved replacement value. |
-| **Review the unified materials** | Current owner request: clearer, consistent, friendly documentation before submission. |
-| **Agree to the terms, then choose final Submit** | Latest screenshot showed the terms checkbox empty and final Submit incomplete. Only the owner can decide to agree and submit. |
-| **Confirm the completion screen** | A public project page or four checked input steps is not final-submission proof. |
+**Next one operation:** open the public project and play the embedded video to confirm the replacement appears.
 
-Correct code URL: [mainitika-ship-it/yasashii-bowel-care-agent](https://github.com/mainitika-ship-it/yasashii-bowel-care-agent).
-
-**Next one operation:** review the [short introduction](../README.md). Before final submission, reopen Additional info once to confirm the corrected code URL remains saved.
+The dedicated repository is [mainitika-ship-it/yasashii-bowel-care-agent](https://github.com/mainitika-ship-it/yasashii-bowel-care-agent). Individual custom answers and attachment bytes are not exposed by the project read API; prior screenshot checks remain distinguished below.
 
 The deadline is **September 15, 2026 at 09:00 JST / 00:00 UTC**. See the [official rules](https://agentsforhumans.devpost.com/rules). The submission screen's reminder asks entrants not to change submitted materials after the deadline until after the winner announcement.
 
@@ -32,12 +28,12 @@ The deadline is **September 15, 2026 at 09:00 JST / 00:00 UTC**. See the [offici
 | README and execution steps | **Available** in English and Japanese; offline and actual model execution are distinguished |
 | MIT / Apache license | **MIT** at repository root |
 | Architecture attachment | **Attachment and new bilingual preview visible** in September 14 owner screenshots; attachment bytes not independently downloaded |
-| Public video under five minutes | **URL registered on Devpost; owner viewing reported**. Reviewed local file: 235.833 seconds, about 3:56 |
-| English or translation | English documentation and narration; video captions Japanese above English; diagram English above Japanese |
+| Public video under five minutes | **Replacement URL registered on Devpost and read back**. Prepared edition: 3:14; public playback and duration not independently rechecked |
+| English or translation | English documentation; prepared replacement video and diagram use English above Japanese |
 | Submitter type, country, track | **Visible in owner screenshots:** Individual, Japan, Everyday Agents |
 | AWS Builder ID | **Correct registered email visible** in owner screenshot; account profile previously checked. Email omitted from this public checklist |
-| Required form steps | **Four input steps checked**, including Project details and Additional info; individual saved values still need the code-URL check above |
-| Final Submit | **Not submitted**: latest screenshot is DRAFT; live project/hackathon `submitted_at` remains unset |
+| Required form steps | **Four input steps checked in earlier screenshots**. Submission timestamp now confirmed; individual custom answers not re-read by this API |
+| Final Submit | **Submitted**: live project/hackathon `submitted_at` is `2026-09-13T23:36:19.437-04:00` |
 
 Implementation is not real-world validation. “Visible” describes a screenshot, “registered” describes a live project read, and “verified” describes the specific evidence stated. None means that the whole care product is finished.
 
@@ -69,9 +65,11 @@ The source was checked against public commit `4d3946bf8dc7d1d74a2b270642f9ab23c2
 
 [September 11 original evidence](verification_2026-09-11.md) contains the source, log and prompt-correction provenance. The successful Mac run does not need to be repeated merely to read or present its saved results.
 
-## Video: duration and honest presentation
+## Previous video — archived verification, not the replacement
 
-Current reviewed local audio-refined file: `ybca-voice-refined.mp4`, 1280 × 720, **235.833 seconds (about 3:56)**.
+The measurements and checks below concern the earlier edition only; they do not certify the replacement upload.
+
+Previously reviewed local audio-refined file: `ybca-voice-refined.mp4`, 1280 × 720, **235.833 seconds (about 3:56)**.
 
 SHA-256: `c7ec081f2059d8b032a06e358b330aadea2fee4b44d4aa37d29e6cd5ac697c3a`.
 
