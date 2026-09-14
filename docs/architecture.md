@@ -1,55 +1,85 @@
-# Architecture
+# Architecture — AI helps. People decide.
 
-![Yasashii Bowel Care Agent architecture](architecture.png)
+**Prepared input → quality checks → a guarded action → a clear handoff.**
 
-This PNG is suitable for Devpost's required architecture file upload. It is generated from repository-owned shapes and English labels with `python tools/render_architecture.py` after installing `requirements-assets.txt`. File preparation does not imply the attachment has been updated on Devpost.
+家族介護の記録を支え、不確かなときは人へ戻す構成です。
 
-## Read the workflow
+![Yasashii: synthetic input, QC checks, Strands, guarded tools, then PASS record / HOLD pending / STOP alert. Only PASS enters the handoff.](architecture-ja-en.png)
 
-Prepared synthetic input goes through schema and quality checks before a Strands agent selects a tool. An execution guard permits only the action allowed by those checks. The agent cannot override the quality policy or invent values for the record.
+[Open the full-size diagram](architecture-ja-en.png) · [Try the workflow](../README.md#try-the-three-cases) · [Review the evidence](verification_2026-09-11.md)
 
-- **PASS:** save one normal observation; only these observations enter the handoff.
-- **HOLD:** save a pending request for human review; do not assume approval.
-- **STOP:** save a separate safety alert; do not create a normal observation record.
+This bilingual diagram uses English above Japanese, rounded cards and symbols as well as color. Its September 13 offline check is a dated result, not a claim of new inference. The same design is visible in the owner's September 14 Devpost attachment preview; that preview is not a byte-for-byte download verification.
 
-Offline execution and privacy-flagged inputs bypass the model and use the local guard directly. The camera/vision connection is a separate, unverified integration. Real-image detection performance, effectiveness in care, and clinical safety are unverified. The caregiver approval screen is not implemented; duplicate prevention across restarts remains future work.
+## One input, three destinations
 
-## Components and routes
+| Outcome | Plain meaning | Output | Handoff |
+|---|---|---|---|
+| ✓ **PASS — Record** | The prepared input passes software checks. | One normal observation | Included |
+| ? **HOLD — Ask a person** | The input is uncertain. | One pending review request | Excluded |
+| ! **STOP — Stop & alert** | Signal or privacy controls fail. | One separate safety alert | Excluded |
 
-```mermaid
-flowchart TD
-    A[Synthetic JSON samples] --> C[Schema and explainable QC]
-    B[Pre-existing vision: integration unverified] -.-> C
-    C -->|Live and privacy check passed| E[Fresh Strands agent: Bedrock or Ollama]
-    C -->|Offline or privacy stop| K[Local action guard]
-    E --> K
-    K -->|PASS| F[Observation record]
-    K -->|HOLD| G[Pending caregiver queue]
-    K -->|STOP| H[Safety alert]
-    F --> J[Daily handoff]
-```
+**The saved demonstration has one PASS observation in the handoff.** HOLD is not human approval: no caregiver approval screen or automatic caregiver notification is implemented.
 
-## Boundary between pre-existing and hackathon work
+## Where Strands is used
 
-**Pre-existing prototype, disclosed:** local toilet-water-region monitoring, possible-event detection, changed-area measurement, relative amount classification, CSV logging, privacy and signal guards.
+1. **Input:** validate prepared synthetic JSON. The camera connection is not part of the verified input path.
+2. **QC:** fixed code checks signal health, the supplied privacy flag, event type, confidence and relative amount.
+3. **Strands Agents SDK:** a fresh agent selects a no-argument tool matching that QC decision.
+4. **Guarded tools:** a pre-tool hook and local `EventRun` reject wrong actions, invented arguments and duplicate writes within the same event execution.
+5. **Handoff:** summarize only normal PASS observations; keep pending reviews and alerts separate.
 
-**New during the hackathon:** Strands-based orchestration, the explainable PASS/HOLD/STOP policy, human-confirmation and safe-stop tools, privacy-minimized JSONL records, handoff summaries, tests, and the end-to-end agent behavior.
+Offline execution and privacy-flagged inputs skip the model and reach the same local guard directly. A privacy flag is supplied input, not an automatic detector of personal information in images.
 
-## Why the deterministic QC layer remains outside the model
+## QC / IATF-inspired thinking
 
-The local QC policy validates critical conditions before the model is asked to act. A privacy-flagged event bypasses both model routes and creates its safety alert through the local guard. For other validated live events, the Strands agent selects the tool, but a pre-tool hook and local `EventRun` guard enforce the QC match and reject duplicate writes. The no-argument tools use original validated event values; model-generated amounts, notes, or identities cannot enter the log through tool arguments.
+| Principle | What it means here |
+|---|---|
+| ✓ **Check** | Validate input and apply known rules first. |
+| ◇ **Prevent** | Block wrong tool actions, invented values and repeat writes within one execution. |
+| ! **React** | Keep uncertain inputs pending; separate safety alerts from observations. |
+| ↗ **Trace** | Preserve reason codes, logs and source/input hashes. |
 
-Each event uses a fresh agent with a two-model-cycle limit and disabled SDK retries. Offline rehearsal bypasses the model and uses the same local write guard. Offline results and scripted-model SDK tests are clearly separated from actual model inference. The per-run guard is not cross-process idempotency; this remains a synthetic demonstration prototype.
+These are quality-management ideas used to explain existing controls, **not IATF 16949 certification, a conformity claim or clinical safety validation**. [QC method and thresholds](qc_method.md)
 
-The [local Ollama route](local_model_guide.md) requires an installed model advertising tool support and local GGUF metadata. Requests use numeric loopback with proxies and redirects disabled. This is an application check, not independent proof of server behavior or network isolation. Bedrock calls require explicit paid opt-in; local failures never fall back to Bedrock.
+## Evidence, kept separate
 
-The [reviewed September 11 Mac run](verification_2026-09-11.md) used Strands Agents SDK 1.55.1, Ollama, and `qwen3:8b`. Its saved results confirm PASS / HOLD / STOP and one PASS-only handoff observation; all 13 source/input hashes match the reviewed source. This is saved synthetic run evidence, not a new inference run in this build environment. No successful Bedrock run is claimed. The diagram depicts supported routes, not evidence that every route has been run successfully.
+| Evidence | Verified scope |
+|---|---|
+| Saved Mac run · September 11 | Strands Agents SDK 1.55.1 + Ollama + `qwen3:8b`; PASS / HOLD / STOP with synthetic inputs |
+| Handoff | **1 PASS observation** |
+| File comparison | **13 / 13 source/input hashes matched** |
+| Automated tests | **109 passed**, preserved scripted-model result with network access blocked |
+| Offline rehearsal | Local QC, guarded writes and handoff; **no AI model call** |
 
-## Safety principles
+[Original reports and logs](verification_2026-09-11.md) document provenance and limits. File hashes demonstrate consistency with received evidence, not independent attestation of model execution. The source is not changed by this documentation update.
 
-- Public demos use safe simulated data.
-- No medical diagnosis.
-- No patient identity is needed by the agent.
-- Raw images are not required once the local vision layer has produced a structured event.
-- Uncertainty is escalated to a human rather than silently converted into a factual claim.
-- A failed signal or privacy check stops automatic recording.
+## Model routes and execution limits
+
+**Verified saved model route:** Strands + local Ollama + `qwen3:8b`.
+
+**Alternative implemented route:** Amazon Bedrock. Successful Bedrock execution remains unverified. Paid requests require explicit opt-in; local failures do not fall back to Bedrock.
+
+Each event uses a fresh agent, at most two model cycles, and disabled SDK retries. No-argument tools use original validated values; the model cannot supply new care values. Duplicate prevention is within one event execution, not across processes or restarts.
+
+The local route checks tool support and local GGUF metadata, uses numeric loopback, and disables proxies and redirects. These checks rely on truthful server metadata; they are not independent proof of network isolation. [Local model details](local_model_guide.md)
+
+## Existing work and new hackathon work
+
+**Pre-existing, disclosed:** local toilet-water-region monitoring, possible-event detection, changed-area measurement, relative amount classification, CSV logging and privacy/signal guards.
+
+**New during the hackathon:** Strands orchestration, the PASS / HOLD / STOP policy, guarded tools, pending-review records, handoff summaries and repeatable verification. The separate camera prototype has not been validated as an integrated input to this submitted workflow.
+
+## Still to validate or build
+
+- **Unverified:** real camera integration, real-image detection performance, real-care benefits and clinical safety.
+- **Not implemented:** caregiver approval screen.
+- **Future work:** duplicate prevention across restarts and private real-image evaluation with privacy safeguards.
+
+The prototype supports observation and communication; it does not diagnose illness. Missing observations are not proof that no bowel movement occurred.
+
+<details>
+<summary>Earlier technical diagram</summary>
+
+The [earlier English diagram](architecture.png) is retained as a historical technical asset. The current introduction and submission diagram is [architecture-ja-en.png](architecture-ja-en.png). The existing `tools/render_architecture.py` renders the earlier diagram; it does not recreate the new bilingual design.
+
+</details>

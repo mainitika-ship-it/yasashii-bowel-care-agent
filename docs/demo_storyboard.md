@@ -1,3 +1,11 @@
+# Earlier storyboard — historical production plan
+
+> **Archived plan, not the current video or remaining-work list.** The [public video](https://www.youtube.com/watch?v=Cuf4LXeQJCU) is already registered on Devpost. The reviewed local audio-refined file is **235.833 seconds (about 3:56)**. This older plan targeted 4:30; its timing and “video still needed” notes describe the production stage only. For current work, use [submission readiness](submission_readiness.md). For the current design, use the [bilingual architecture](architecture-ja-en.png).
+>
+> 制作時の旧案です。現在の公開動画・残作業・実測時間を示す資料ではありません。
+
+---
+
 # Demo Video Storyboard — target 4:30 or less
 
 The event allows a maximum 5-minute video. This storyboard leaves buffer for upload / playback differences.

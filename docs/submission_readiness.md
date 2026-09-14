@@ -1,134 +1,92 @@
-# Agents for Humans Hackathon — Submission Readiness
+# Submission readiness — what remains?
 
-Updated: 2026-09-13 (live Devpost readback, owner screenshot, saved-evidence recheck, and fresh offline run)
+**Updated September 14, 2026. The project is still a draft for this hackathon. Final Submit is on hold while the owner reviews the unified materials.**
 
-This file is the project-side checklist for the final Devpost submission. It is intentionally conservative: an item is marked complete only when it has been verified, not merely planned.
+提出資料を整えてから、本人が最終提出を判断します。
 
-The [official requirements](https://agentsforhumans.devpost.com/) and current Devpost entry were checked again on September 13. **Strands is required, but Bedrock or a specific model is not.** The live deadline is **2026-09-15 00:00 UTC / 09:00 JST**. The public description, [YouTube video URL](https://www.youtube.com/watch?v=Cuf4LXeQJCU), and dedicated repository link were read back successfully. The project-specific hackathon `submitted_at` remains unset; a published page and the connection's broad `submitted` relationship do not prove final Submit. Earlier empty-video/old-repository notes are historical, not current tasks.
+[Watch the video](https://www.youtube.com/watch?v=Cuf4LXeQJCU) · [Read the project](https://devpost.com/software/yasashii-bowel-care-agent) · [Open the submission list](https://devpost.com/submit-to/30317-agents-for-humans-hackathon/manage/submissions)
 
-## Required by the event
+## Remaining owner actions
 
-**Status meanings:** implemented means the software path exists; verified means evidence confirms the stated test scope. The verified model run uses synthetic data. It does not establish real-world camera performance or effectiveness in care. Planned work and items unverified here are not counted as completed.
+| Action | Why it remains |
+|---|---|
+| **Confirm the corrected custom code URL was saved** | The Additional info screenshot still showed the old `kenji/tree/main/...` URL. The dedicated URL was supplied for replacement. The next screenshot reached Submit, but did not display the saved replacement value. |
+| **Review the unified materials** | Current owner request: clearer, consistent, friendly documentation before submission. |
+| **Agree to the terms, then choose final Submit** | Latest screenshot showed the terms checkbox empty and final Submit incomplete. Only the owner can decide to agree and submit. |
+| **Confirm the completion screen** | A public project page or four checked input steps is not final-submission proof. |
 
-| Requirement | Status | Evidence / next action |
-|---|---|---|
-| Working agent built with Strands Agents SDK | DONE FOR THREE SYNTHETIC CASES | Original Mac `qwen3:8b` reports and logs reviewed: PASS / HOLD / STOP, one matching action per case, one PASS-only handoff. All 10 source hashes and three input hashes match the imported code. See [the evidence review](verification_2026-09-11.md). |
-| Public code repository | PUBLIC / DEVPOST LINK VERIFIED | https://github.com/mainitika-ship-it/yasashii-bowel-care-agent is public, with root README and MIT license. The connected project entry now lists this dedicated repository. The custom-answer field itself is not exposed; check that lower form field if it is shown. |
-| README | DONE | Setup, architecture, safety, pre-existing disclosure, and demo commands are documented. |
-| MIT or Apache license | DONE | Root `LICENSE` contains MIT; GitHub repository metadata again reports `spdx_id: MIT` on September 13. |
-| Architecture diagram | FILE READY / UPLOAD UNVERIFIED | [architecture.png](architecture.png) matches the current implementation and is in an accepted attachment format. Upload/recheck the final file on Devpost. |
-| Demo video, max 5 minutes | DEVPOST URL VERIFIED / OWNER VIEWING REPORTED | The [YouTube URL](https://www.youtube.com/watch?v=Cuf4LXeQJCU) is present in the live Devpost video field. The owner reports viewing it. Local `ybca-voice-refined.mp4` was remeasured at 235.833 seconds (about 3:56); this is not a new measurement of the YouTube stream. Exact uploaded-version correspondence and independent full playback/audio verification remain unconfirmed here. |
-| AWS Builder ID | PREVIOUSLY DONE | Prior record says it was entered; recheck the final required field before Submit. |
-| Problem / audience / why it matters | DONE | Updated public Devpost introduction explains family-care burden, the synthetic workflow, evidence, and limits. |
-| English or English translation | FILES READY / OWNER VIDEO CHECK REPORTED | README, PNG and Devpost text are in English. The local video has English narration and Japanese-above-English captions. Owner viewing is reported separately from independent playback testing. |
-| Required fields and final Submit | NOT COMPLETE | Latest owner screenshot shows submitter type and country selected, and a check on Additional info, but not the lower fields. Track, the architecture attachment, and AWS Builder ID require content-level checking. Earlier Project details was unchecked. Final Submit remains unperformed. |
+Correct code URL: [mainitika-ship-it/yasashii-bowel-care-agent](https://github.com/mainitika-ship-it/yasashii-bowel-care-agent).
 
-## September 13 technical recheck
+**Next one operation:** review the [short introduction](../README.md). Before final submission, reopen Additional info once to confirm the corrected code URL remains saved.
 
-- Compared local files against public commit `58c2d19227c11eb5d98a73a935e445351d34dfeb`: source, tests, inputs, evidence, requirements, and architecture bytes match. Documentation changes are reviewed separately.
-- Recomputed **13/13 source/input hashes** against the saved Mac report; all match.
-- Confirmed saved PASS / HOLD / STOP receipts, three separate one-record logs, pending HOLD, and a handoff containing only **one PASS observation**.
-- Regenerated the saved HTML in memory; it matches the original HTML exactly.
-- Ran a **fresh offline** three-case pipeline successfully, without a model or AWS call. This is not a new live-model run.
-- The [CI run for the public commit](https://github.com/mainitika-ship-it/yasashii-bowel-care-agent/actions/runs/34735097422) completed successfully, including automated tests, offline execution, and packaging. The **109-test** count is the preserved regression result; the full pytest suite was not rerun locally in this recheck.
+The deadline is **September 15, 2026 at 09:00 JST / 00:00 UTC**. See the [official rules](https://agentsforhumans.devpost.com/rules). The submission screen's reminder asks entrants not to change submitted materials after the deadline until after the winner announcement.
 
-## Next owner operation
+## Required items — evidence of the stated scope
 
-On **Additional info**, scroll down and check the track, code URL, required architecture file, and AWS Builder ID. Do not infer their correctness from the section checkmark. Then return to **Project details** and check any required field or validation message before saving. The screenshots do not yet identify why that stage is incomplete. Final Submit remains a separate owner-confirmed action.
+| Requirement | Current check |
+|---|---|
+| Strands workflow | **Verified on three synthetic cases** in the saved Mac run: Strands Agents SDK 1.55.1 + Ollama + `qwen3:8b` |
+| Public code repository | **Public** dedicated repository with root README and MIT license; public Devpost project link points here |
+| README and execution steps | **Available** in English and Japanese; offline and actual model execution are distinguished |
+| MIT / Apache license | **MIT** at repository root |
+| Architecture attachment | **Attachment and new bilingual preview visible** in September 14 owner screenshots; attachment bytes not independently downloaded |
+| Public video under five minutes | **URL registered on Devpost; owner viewing reported**. Reviewed local file: 235.833 seconds, about 3:56 |
+| English or translation | English documentation and narration; video captions Japanese above English; diagram English above Japanese |
+| Submitter type, country, track | **Visible in owner screenshots:** Individual, Japan, Everyday Agents |
+| AWS Builder ID | **Correct registered email visible** in owner screenshot; account profile previously checked. Email omitted from this public checklist |
+| Required form steps | **Four input steps checked**, including Project details and Additional info; individual saved values still need the code-URL check above |
+| Final Submit | **Not submitted**: latest screenshot is DRAFT; live project/hackathon `submitted_at` remains unset |
 
-## Core implementation gate
+Implementation is not real-world validation. “Visible” describes a screenshot, “registered” describes a live project read, and “verified” describes the specific evidence stated. None means that the whole care product is finished.
 
-### September 11 local run: original evidence received and reviewed
+## Common facts across the materials
 
-Run `20260911T051811Z-50c8566cb79e` completed the three synthetic cases with local `qwen3:8b`. The handoff ZIP has been received and checked: all 28 manifest entries and all 13 source/input run-time hashes match; the three logs agree with the samples and QC actions; HOLD stays pending; the saved handoff counts one PASS observation. The original HTML matches the JSON rendered with the recorded source.
+| Topic | Shared wording / result |
+|---|---|
+| PASS | Record a normal observation after software QC; include it in the handoff |
+| HOLD | Save a pending human-review request; exclude it from the handoff |
+| STOP | Do not record a normal observation; save a separate safety alert |
+| Handoff | **1 PASS observation** in the saved three-case run |
+| Source/input evidence | **13 / 13 hashes matched**: ten source files, three inputs |
+| Automated tests | **109 passed** in the saved regression result; scripted models and blocked network |
+| Actual saved model | **Strands + Ollama + qwen3:8b**, not Bedrock |
+| Not yet verified | Bedrock success, real camera integration, real-image performance, real-care benefit and clinical safety |
+| Not yet implemented | Caregiver approval screen |
+| Planned | Cross-restart duplicate prevention and private real-image evaluation with privacy safeguards |
 
-The exact prompt correction was imported. It explains that tool arguments must be `{}` and that the event is already bound to the tool. AST comparison confirms no other executable source change; the argument, action, duplicate-write, model-cycle, and privacy guards remain in place. Original evidence and provenance limits are documented in [the September 11 review](verification_2026-09-11.md).
+Separate camera-project tests are not added to the submitted prototype's verified results. QC / IATF-inspired controls are not certification or a conformity claim.
 
-This closes the original-file handoff task. No inference was repeated to review or import the bundle. A successful synthetic demonstration is not validation for real care use. Video registration has since been verified; the remaining task is final form review.
+## What the September 14 recheck established
 
-### Reproduction checks when a new run is needed
+The source was checked against public commit `4d3946bf8dc7d1d74a2b270642f9ab23c2ad78a9` before this documentation update.
 
-The successful Mac run does not need to be repeated merely to inspect or present its saved results. If another live run is needed, use these checks:
+- **13 / 13 hashes matched** the saved Mac report again.
+- Saved receipts and three one-record logs matched the synthetic inputs; recomputed handoff contained **one PASS observation**.
+- A fresh **offline** run, `20260914T014245Z-b57f38099db2`, verified all three cases without model calls. It is not new live-model evidence.
+- The [preserved CI run](https://github.com/mainitika-ship-it/yasashii-bowel-care-agent/actions/runs/34735097422) succeeded for source/tests unchanged by later documentation changes. **109 is the saved test result**, not a new full-suite run during this document refresh.
 
-1. Choose one real model route. For local Ollama, follow the [metadata check and setup](local_model_guide.md); for Bedrock, obtain owner permission for costs and run the paid preflight.
-2. `python src/demo.py --mode qc` shows PASS, HOLD, STOP in that order.
-3. Run `python src/demo.py --mode live --provider ollama --model-id YOUR_INSTALLED_MODEL` or the Bedrock command `python src/demo.py --mode live --allow-paid-model`. A fresh report must have `verified=true`, `is_live_agent_evidence=true`, and one matching tool for each case. The older `is_live_evidence` field is Bedrock-only and is false for local Ollama.
+[September 11 original evidence](verification_2026-09-11.md) contains the source, log and prompt-correction provenance. The successful Mac run does not need to be repeated merely to read or present its saved results.
 
-The local-vision connection is a separate project integration goal, not an additional official requirement or evidence already achieved. Show and label synthetic input in the public demo; do not claim camera integration. The offline demo, guarded writes, SDK scripted-model tests, and standalone packaging are implemented; see [`verification_2026-09-10.md`](verification_2026-09-10.md). The separate [September 11 review](verification_2026-09-11.md) covers the original local-model report and its evidence limits. Final Devpost Submit remains an owner action.
+## Video: duration and honest presentation
 
-The current build also generates a bilingual, read-only `report.html` for each offline or live demo attempt. It makes pending review and safety stops visible without pretending to implement caregiver approval. See [Japanese execution guide](../README_JA.md).
+Current reviewed local audio-refined file: `ybca-voice-refined.mp4`, 1280 × 720, **235.833 seconds (about 3:56)**.
 
-### Local video provenance and public-registration status
+SHA-256: `c7ec081f2059d8b032a06e358b330aadea2fee4b44d4aa37d29e6cd5ac697c3a`.
 
-The owner-approved video has 20 scenes and 43 bilingual caption intervals. Gentle explanatory dialogue supports the story without presenting the guide's lines as actual agent speech. Actual offline output and saved Mac model results are labelled separately; no live inference screen recording is claimed.
+The video has 20 scenes and 43 bilingual caption intervals. It presents actual offline output and saved Mac model results, labelled separately. The friendly guide's dialogue is narration, not the model's actual speech. It is not a continuous live inference screen recording.
 
-Current reviewed local file: `ybca-voice-refined.mp4`, 1280 x 720, **235.833 seconds (about 3:56)**. SHA-256: `c7ec081f2059d8b032a06e358b330aadea2fee4b44d4aa37d29e6cd5ac697c3a`. This file is prepared outside the source repository. The [public YouTube URL](https://www.youtube.com/watch?v=Cuf4LXeQJCU) is now registered on Devpost, and the owner reports viewing the video. Matching duration alone does not establish that the voice-refined version was uploaded; exact correspondence and independent listening/full-playback checks remain unconfirmed here. The owner supplied a 235.836667-second copy, whose content matched the original master across all 43 caption intervals. The requested audio refinement uses 4% faster speech, gentle equalization and a quieter music mix; the picture and burned-in caption stream remain identical to the verified master. Saved local checks report full AV decoding passed and all 43 speech segments fit their original caption intervals. Original visual checks covered 390/640-pixel review and QR decoding. These checks do not establish real-care benefit.
+Local AV decoding, caption intervals, representative frames, small-screen review and the closing repository QR were checked. These do not replace normal-speed listening or an iPhone playback test. The owner reports having watched the public YouTube video; exact correspondence between that upload and the audio-refined local file remains unconfirmed here. An earlier “3:51” reference is not the measured duration of this reviewed local file.
 
-The project owner's preparation package also contains the matching architecture PNG and original synthetic evidence. This is a convenience package, not an additional official ZIP requirement. Required-field checks and final Submit remain separate actions; the existing video URL does not need to be published again merely to complete this checklist.
+## Which documents are current?
 
-The available project read exposes the video URL and project/hackathon links, but not all saved custom answers or attachment state. Architecture upload and AWS Builder ID therefore remain **unverified here**, not assumed absent or complete.
+| Current entry point | Purpose |
+|---|---|
+| [English README](../README.md) / [Japanese README](../README_JA.md) | Understand the problem and try the three cases |
+| [Architecture](architecture.md) / [bilingual diagram](architecture-ja-en.png) | See QC, Strands, guarded tools and the three destinations |
+| [September 11 verification](verification_2026-09-11.md) | Inspect the original saved evidence |
+| This readiness table | See the current preparation status and remaining actions |
+| [Earlier storyboard](demo_storyboard.md) | Historical production plan, not the current remaining-work list |
 
-## Judging alignment
+The diagram's September 13 offline note and dated verification reports remain historical facts. New documentation does not turn them into new tests.
 
-### Technological Implementation
-
-Priority evidence:
-
-- explicit Strands Agents SDK use;
-- explicit provider and model configuration, with local Ollama or Bedrock;
-- three real tool calls rather than a chat-only mockup;
-- deterministic QC gate before model orchestration;
-- live demonstration if possible.
-
-Optional later: Bedrock AgentCore deployment.
-
-### Design
-
-Target one coherent caregiver experience:
-
-`observe → QC decision → quiet record OR human confirmation → daily handoff`
-
-Avoid adding unrelated features until this single loop is smooth.
-
-### Potential Impact
-
-Show the repetitive burden concretely: repeated checking, remembering, recording, and handing information to family or care professionals.
-
-Use simulated data in the public demo. Do not expose real family care data.
-
-### Creativity & Originality
-
-Emphasize the combination of:
-
-- privacy-minimized local sensing;
-- QC-style PASS / HOLD / STOP controls;
-- an agent that deliberately knows when **not** to decide;
-- human-in-the-loop confirmation only when uncertainty requires it.
-
-### Presentation
-
-The final video must demonstrate the working project. The official guidance permits slides, screen recordings, and voiceover; it does not require a new inference recording. The pitch must clearly state:
-
-1. the problem;
-2. who it is for;
-3. why it matters.
-
-### Evidence limits
-
-Real camera integration, real-image detection performance, real-care benefits, and clinical safety remain unverified. The caregiver approval UI is not implemented, and duplicate-write protection does not span process restarts. Private real-image evaluation with privacy safeguards is planned work, not a completed result.
-
-## Optional score boosters
-
-Only after the required path is stable:
-
-- public live demo link;
-- Bedrock AgentCore deployment;
-- builder.aws build-journey post.
-
-## Do not do yet
-
-- Do not upgrade AWS to a paid plan merely for dashboard widgets.
-- Do not launch EC2, RDS, or other persistent services only to earn credits.
-- Do not put AWS access keys, patient images, names, addresses, Wi-Fi data, or real care logs in GitHub.
-- Do not claim clinical accuracy or diagnosis.
-- Do not press final Devpost Submit until the public video and final repository are verified.
+Optional live hosting, AgentCore and a builder.aws bonus article can wait. They are not added to the required submission work. The mandatory Strands workflow does not require a successful Bedrock run; see the [official requirement recheck](hackathon_recheck.md).
