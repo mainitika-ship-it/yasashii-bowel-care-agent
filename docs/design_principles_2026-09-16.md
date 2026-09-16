@@ -2,6 +2,27 @@
 
 This note records a **post-submission design direction** for Yasashii Bowel Care Agent. It does **not** change the verified scope of the hackathon submission and does not claim that the future items below are implemented.
 
+## やさしい要約 / Plain-language summary
+
+難しく考えないために、まずここだけを正本として残します。
+
+- 今までの実装の流れは壊さない。
+- 今回話した内容は、新しい「7本柱」へ置き換える話ではない。
+- 新しい仕組みに人を合わせるのではなく、**今までの介護・記録・申し送りにシステム側が寄り添う**。
+- 使う年月が長くなるほど、**人が入力・転記・確認・申し送り・保全に使う作業を少しずつ減らす**。
+- 安さだけを追わず、導入・学習・日常操作・保全まで含めた**総負担とストレスを小さくする**。
+- 現場の困りごと、例外、HOLD、故障や手戻りを次の改善材料として残す。
+
+**一言で言えば：**
+
+> **今ある介護に寄り添い、人の判断を残しながら、人がしなければならない仕事を年月とともに減らしていく。**
+
+> **Yasashii should fit the care already being given, preserve human judgment, and make the amount of work people must do smaller over time.**
+
+### Important terminology note
+
+The five-step flow below is the **current implementation spine** documented in this repository. It should not be retroactively described as an older canonical “five pillars” framework unless a separate historical source is found and verified. The later seven-item grouping is a **cross-cutting review checklist**, not a replacement architecture.
+
 ## 1. Preserve the existing five-step implementation spine
 
 The current documented workflow remains the technical spine:
